@@ -2,15 +2,24 @@ data "azurerm_resource_group" "main" {
     name = local.resource_group_name 
 }
 
-
 # Variables générales:
 locals {
-    resource_group_name = data.azurerm_resource_group.main.name
+    subscription_id     = "c56aea2c-50de-4adc-9673-6a8008892c21"
+    resource_group_name = "b2e1-gr2"
     location = data.azurerm_resource_group.main.location
-    location_wus = "West US"
+    location_wus = "WestUS"
 }
 
-# Variables pour la machine virtuelle
+# Network variables
+locals {
+  network_europe = ["10.1.0.0/16"]
+  subnets      = ["10.1.1.0/24", "10.1.2.0/24"]
+  network_wus = ["10.2.0.0/16"]
+  
+}
+
+
+Variables pour la machine virtuelle
 locals {
   os_disk_name     = "${local.resource_group_name}-vm"
   os_disk_caching           = "ReadWrite"

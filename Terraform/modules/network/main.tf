@@ -1,5 +1,5 @@
 resource "azurerm_virtual_network" "main" {
-  name                = "vnet"
+  name                = "vnet-${lower(var.location)}"
   location            = var.location
   resource_group_name = var.resource_group
   address_space       = var.vnet_cidr
@@ -13,7 +13,3 @@ resource "azurerm_subnet" "main" {
   resource_group_name  = var.resource_group
   address_prefixes     = [each.value]
 }
-
-
-
-# az network vnet peering create -g MyResourceGroup -n MyVnet1ToMyVnet2 --vnet-name MyVnet1 --remote-vnet MyVnet2Id --allow-vnet-access
