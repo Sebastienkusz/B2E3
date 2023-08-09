@@ -40,3 +40,16 @@ locals {
   path = "/home/adminuser/.ssh/authorized_keys"
   ssh_key        = file("~/.ssh/b2e1-gr2-key.pub")
 }
+
+# Variables pour l'application Gateway
+locals {
+  domain_name_label = "${local.resource_group_name}-gateway"
+  sku_name =  "Standard_v2"
+  tier = "Standard_v2"
+  cookie_based_affinity = "Disabled"
+  backend_port = 80
+  backend_protocol = "Http"
+  frontend_port = 80
+  frontend_protocol = "Http"
+  rule_type = "Basic"
+}

@@ -82,7 +82,7 @@ variable "public_ip_allocation_method" {
     default = "Dynamic"
 }
 
-variable "vm_domain_name_label" {
+variable "domain_name_label" {
     type = string
     description = "(Optional) Label for the Domain Name. Will be used to make up the FQDN. If a domain name label is specified, an A DNS record is created for the public IP in the Microsoft Azure DNS system"
 }

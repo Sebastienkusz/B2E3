@@ -33,7 +33,7 @@ resource "azurerm_virtual_network_peering" "vnet-2" {
 module "vm" {
   source = "./modules/vm"
   resource_group = local.resource_group_name
-  location = local.location
+  location = local.location_wus
   vm_size = local.vm_size
 
   os_disk_caching = local.os_disk_caching
@@ -50,7 +50,7 @@ module "vm" {
   ssh_key = local.ssh_key
 
   public_ip_allocation_method = local.public_ip_allocation_method
-  vm_domain_name_label = local.vm_domain_name_label
+  domain_name_label = local.vm_domain_name_label
   public_ip_sku = local.public_ip_sku
 
 }

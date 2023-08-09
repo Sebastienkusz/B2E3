@@ -3,7 +3,7 @@ resource "azurerm_public_ip" "main" {
   location            = var.location
   resource_group_name = var.resource_group
   allocation_method   = var.public_ip_allocation_method
-  domain_name_label   = var.vm_domain_name_label
+  domain_name_label   = var.domain_name_label
   sku                 = var.public_ip_sku
 }
 
@@ -14,7 +14,7 @@ resource "azurerm_network_interface" "main" {
 
   ip_configuration {
     name                          = "${var.resource_group}-vm-ip-config"
-    subnet_id                     = module.vnet-usa.subnet_ids
+    subnet_id                     = module.vnet-usa.subnet_ids # !!!!
     private_ip_address_allocation = "Dynamic"
   }
 }
