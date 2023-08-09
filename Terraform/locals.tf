@@ -19,9 +19,14 @@ locals {
 }
 
 
-Variables pour la machine virtuelle
+# Variables pour la machine virtuelle
 locals {
-  os_disk_name     = "${local.resource_group_name}-vm"
+  public_ip_allocation_method = "Dynamic"
+  vm_domain_name_label = "${local.resource_group_name}-vm"
+  public_ip_sku = "Standard"
+
+  vm_size = "Standard_B1s"
+
   os_disk_caching           = "ReadWrite"
   os_disk_create_option     = "FromImage"
   os_disk_managed_disk_type = "Standard_LRS"
@@ -32,5 +37,6 @@ locals {
   image_version   = "latest"
 
   admin_username = "adminuser"
+  path = "/home/adminuser/.ssh/authorized_keys"
   ssh_key        = file("~/.ssh/b2e1-gr2-key.pub")
 }
