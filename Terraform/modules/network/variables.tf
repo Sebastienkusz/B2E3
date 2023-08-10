@@ -4,26 +4,39 @@ variable "resource_group" {
   nullable    = false
 }
 
-variable "location" {
+variable "location_1" {
   type        = string
   description = "(Required) The location/region where the virtual network is created. Changing this forces a new resource to be created."
   nullable    = false
   default     = "westeurope"
 }
 
-variable "vnet_cidr" {
+variable "location_2" {
+  type        = string
+  description = "(Required) The location/region where the virtual network is created. Changing this forces a new resource to be created."
+  nullable    = false
+  default     = "westus"
+}
+
+variable "vnet_1" {
   type        = list(string)
   description = "(Required) The address space that is used by the virtual network. You can supply more than one address space."
   nullable    = false
 }
 
-variable "tags" {
-  type        = map(string)
-  description = "(Optional) A mapping of tags to assign to the virtual network."
-  default     = {}
+variable "vnet_2" {
+  type        = list(string)
+  description = "(Required) The address space that is used by the virtual network. You can supply more than one address space."
+  nullable    = false
 }
 
-variable "subnet_cidrs" {
+variable "subnet_1" {
+  type        = list(string)
+  description = "(Required) A list of address prefixes to use for the subnets."
+  default     = []
+}
+
+variable "subnet_2" {
   type        = list(string)
   description = "(Required) A list of address prefixes to use for the subnets."
   default     = []
