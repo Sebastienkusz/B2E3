@@ -1,0 +1,5 @@
+---
+- hosts: redis
+  become: true
+  roles:
+    - redis-setup/roles/redis-install
