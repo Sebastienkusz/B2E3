@@ -40,8 +40,9 @@ module "gateway" {
   resource_group              = local.resource_group_name
   location                    = local.location
   public_ip_allocation_method = local.public_ip_allocation_method
-  domain_name_label           = local.domain_name_label
+  domain_name_label           = local.app_domain_name_label
   public_ip_sku               = local.public_ip_sku
+  subnet_id                   = values(module.vnet.subnet_1_ids)[0]
   name                        = local.gateway_name
   sku_name                    = local.sku_name
   cookie_based_affinity       = local.cookie_based_affinity
@@ -51,6 +52,16 @@ module "gateway" {
   frontend_port               = local.frontend_port
   rule_type                   = local.rule_type
   tier                        = local.tier
-  subnet_id                   = values(module.vnet.subnet_1_ids)[0]
+}
 
+module "aks" {
+  source                      = "./modules/cluster"
+  resource_group              = local.resource_group_name
+  location                    = local.location
+  public_ip_allocation_method = local.public_ip_allocation_method
+  domain_name_label           = local.aks_domain_name_label
+  public_ip_sku               = local.public_ip_sku
+  subnet_id                   = values(module.vnet.subnet_1_ids)[1]
+  vm_size                     = local.aks_vm_size
+  pool_name                   = local.pool_name
 }

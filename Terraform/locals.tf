@@ -44,7 +44,7 @@ locals {
 
 # Variables pour l'application Gateway
 locals {
-  domain_name_label     = "${local.resource_group_name}-gateway"
+  app_domain_name_label = "${local.resource_group_name}-gateway"
   sku_name              = "Standard_v2"
   tier                  = "Standard_v2"
   cookie_based_affinity = "Disabled"
@@ -54,4 +54,11 @@ locals {
   frontend_protocol     = "Http"
   rule_type             = "Basic"
   gateway_name          = "gateway"
+}
+
+# Variables pour le cluster AKS
+locals {
+  aks_domain_name_label = "${local.resource_group_name}-aks"
+  pool_name             = "b2e1gr2pool"
+  aks_vm_size = "Standard_A2_v2"
 }

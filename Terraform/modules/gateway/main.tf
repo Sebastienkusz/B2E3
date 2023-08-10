@@ -3,7 +3,7 @@ resource "azurerm_public_ip" "main" {
   name                = "${var.resource_group}-gateway-ip"
   location            = var.location
   resource_group_name = var.resource_group
-  domain_name_label   = "${var.resource_group}-gateway"
+  domain_name_label   = var.domain_name_label
   allocation_method   = var.public_ip_allocation_method
   sku                 = var.public_ip_sku
 }

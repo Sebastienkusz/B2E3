@@ -35,56 +35,14 @@ variable "subnet_id" {
   nullable    = false
 }
 
-variable "name" {
+variable "vm_size" {
   type        = string
-  description = "(Required) Names used for the Gateway"
+  description = "(Required) The size of the virtual machine used to host Redis"
   nullable    = false
-  default     = "app-gateway"
 }
 
-variable "sku_name" {
+variable "pool_name" {
   type        = string
-  description = "(Required) The Name of the SKU to use for this Application Gateway."
-  nullable    = false
-  default     = "Standard_v2"
-}
-
-variable "cookie_based_affinity" {
-  type        = string
-  description = "(Required) Is Cookie-Based Affinity enabled? "
+  description = "(Required) Name of the node pool"
   nullable    = false
 }
-
-variable "backend_port" {
-  type        = number
-  description = "(Required) The port which should be used for this Backend HTTP Settings Collection."
-  nullable    = false
-}
-
-variable "backend_protocol" {
-  type        = string
-  description = "(Required) The Protocol which should be used."
-  nullable    = false
-}
-
-variable "frontend_protocol" {
-  type        = string
-  description = "(Required) The Protocol which should be used."
-  nullable    = false
-}
-
-variable "frontend_port" {
-  type = number
-}
-variable "rule_type" {
-  type        = string
-  description = "(Required) The Type of Routing that should be used for this Rule."
-  nullable    = false
-}
-
-variable "tier" {
-  type        = string
-  description = "(Required) The Tier of the SKU to use for this Application Gateway"
-  nullable    = false
-}
-
