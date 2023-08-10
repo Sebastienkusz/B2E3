@@ -2,7 +2,7 @@
 resource "azurerm_public_ip" "main" {
   name                = "${var.resource_group}-gateway-ip"
   location            = var.location
-  resource_group_name = var.resource_groupe
+  resource_group_name = var.resource_group
   domain_name_label   = "${var.resource_group}-gateway"
   allocation_method   = var.public_ip_allocation_method
   sku                 = var.public_ip_sku
@@ -12,7 +12,7 @@ resource "azurerm_public_ip" "main" {
 resource "azurerm_network_security_group" "main" {
   name                = "${var.resource_group}-gateway-nsg"
   location            = var.location
-  resource_group_name = var.resource_groupe
+  resource_group_name = var.resource_group
 }
 
 # Règle de sécurité pour la tranche de port 65200-65535 depuis n'importe quelle source sur la passerelle d'application ( Norme V2)
@@ -46,57 +46,65 @@ resource "azurerm_network_security_rule" "second" {
 
 # Association du NSG au sous-réseau de la passerelle
 resource "azurerm_subnet_network_security_group_association" "app-gateway-subnet-nsg" {
-  subnet_id                 = module.vnet.subnet_ids  #!!!!
+  subnet_id                 = var.subnet_id
   network_security_group_id = azurerm_network_security_group.main.id
 }
 
 resource "azurerm_application_gateway" "main" {
-  name = "${var.resource_group}-gateway"
+  name                = "${var.resource_group}-gateway"
   resource_group_name = var.resource_group
-  location = var.location
+  location            = var.location
 
-  backend_address_pool{
+  backend_address_pool {
     name = var.name
-   # ip_addresses =  IP PRIVEE CLUSTER AKS
+    # ip_addresses =  IP PRIVEE CLUSTER AKS
   }
 
-  backend_http_settings{
+  backend_http_settings {
     cookie_based_affinity = var.cookie_based_affinity
-    name = var.name
-    port = var.backend_port
-    protocol = var.backend_protocol
-    }
-
-  frontend_ip_configuration{
-    name = var.name
+    name                  = var.name
+    port                  = var.backend_port
+    protocol              = var.backend_protocol
   }
 
-  frontend_port{
+  frontend_ip_configuration {
+    name                 = var.name
+    public_ip_address_id = azurerm_public_ip.main.id
+  }
+
+  frontend_port {
     name = var.name
     port = var.frontend_port
   }
 
-  gateway_ip_configuration{
-    name = var.name
-    subnet_id = module.vnet.subnet_ids  #!!!!
+  gateway_ip_configuration {
+    name      = var.name
+    subnet_id = var.subnet_id
   }
 
-  http_listener{
-    name  = var.name
+  http_listener {
+    name                           = var.name
     frontend_ip_configuration_name = var.name
-    frontend_port_name = var.name
-    protocol = var.frontend_protocol
+    frontend_port_name             = var.name
+    protocol                       = var.frontend_protocol
   }
 
-  request_routing_rule{
-    name = var.name
-    rule_type = var.rule_type
-    http_listener_name = var.name
+  request_routing_rule {
+    name                       = var.name
+    priority                   = 1
+    rule_type                  = var.rule_type
+    http_listener_name         = var.name
+    backend_address_pool_name  = var.name
+    backend_http_settings_name = var.name
   }
 
-  sku{
+  sku {
     name = var.sku_name
     tier = var.tier
+  }
+  autoscale_configuration {
+    min_capacity = 0
+    max_capacity = 3
   }
 
 }

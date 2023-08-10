@@ -12,72 +12,78 @@ variable "location" {
 }
 
 variable "public_ip_allocation_method" {
-    type = string 
-    description = "(Required) Defines the allocation method for this IP address. Possible values are Static or Dynamic"
-    nullable = false
-    default = "Dynamic"
+  type        = string
+  description = "(Required) Defines the allocation method for this IP address. Possible values are Static or Dynamic"
+  nullable    = false
+  default     = "Dynamic"
 }
 
 variable "domain_name_label" {
-    type = string
-    description = "(Optional) Label for the Domain Name. Will be used to make up the FQDN. If a domain name label is specified, an A DNS record is created for the public IP in the Microsoft Azure DNS system"
+  type        = string
+  description = "(Optional) Label for the Domain Name. Will be used to make up the FQDN. If a domain name label is specified, an A DNS record is created for the public IP in the Microsoft Azure DNS system"
 }
 
 variable "public_ip_sku" {
-    type = string
-    description = "(Optional) The SKU of the Public IP. Accepted values are Basic and Standard"
-    default = "Basic"
+  type        = string
+  description = "(Optional) The SKU of the Public IP. Accepted values are Basic and Standard"
+  default     = "Basic"
 }
 
 variable "name" {
-  type = string
+  type        = string
   description = "(Required) Names used for the Gateway"
-  nullable = false
-  default = "app-gateway"
+  nullable    = false
+  default     = "app-gateway"
 }
 
 variable "sku_name" {
-  type = string
+  type        = string
   description = "(Required) The Name of the SKU to use for this Application Gateway."
-  nullable = false
-  default = "Standard_v2"
+  nullable    = false
+  default     = "Standard_v2"
 }
 
 variable "cookie_based_affinity" {
-  type = string
+  type        = string
   description = "(Required) Is Cookie-Based Affinity enabled? "
-  nullable = false
+  nullable    = false
 }
 
 variable "backend_port" {
-  type = number
+  type        = number
   description = "(Required) The port which should be used for this Backend HTTP Settings Collection."
-  nullable = false
+  nullable    = false
 }
 
 variable "backend_protocol" {
-  type = string
+  type        = string
   description = "(Required) The Protocol which should be used."
-  nullable = false
+  nullable    = false
 }
 
 variable "frontend_protocol" {
-  type = string
+  type        = string
   description = "(Required) The Protocol which should be used."
-  nullable = false
+  nullable    = false
 }
 
 variable "frontend_port" {
-  type  = number
+  type = number
 }
 variable "rule_type" {
-  type = string
+  type        = string
   description = "(Required) The Type of Routing that should be used for this Rule."
-  nullable = false
+  nullable    = false
 }
 
 variable "tier" {
-  type = string
-  description = "Required) The Tier of the SKU to use for this Application Gateway"
-  nullable = false
+  type        = string
+  description = "(Required) The Tier of the SKU to use for this Application Gateway"
+  nullable    = false
+}
+
+variable "subnet_id" {
+  type        = string
+  description = "(Required) Application gateway subnet ID"
+  nullable    = false
 }

@@ -14,7 +14,7 @@ resource "azurerm_network_interface" "main" {
 
   ip_configuration {
     name                          = "${var.resource_group}-vm-ip-config"
-    subnet_id                     = module.vnet-usa.subnet_ids # !!!!
+    subnet_id                     = var.subnet_id
     private_ip_address_allocation = "Dynamic"
   }
 }
@@ -46,9 +46,9 @@ resource "azurerm_network_security_rule" "main" {
 }
 
 resource "azurerm_virtual_machine" "main" {
-    name = "${var.resource_group}-vm"
-    location = var.location
-    resource_group = var.resource_group
+  name                  = "${var.resource_group}-vm"
+  location              = var.location
+  resource_group_name   = var.resource_group
   network_interface_ids = [azurerm_network_interface.main.id]
   vm_size               = var.vm_size
 
