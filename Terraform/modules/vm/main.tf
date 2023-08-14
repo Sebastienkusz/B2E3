@@ -47,12 +47,12 @@ resource "azurerm_network_security_rule" "main" {
 }
 
 resource "azurerm_virtual_machine" "main" {
-  name                  = "${var.resource_group}-vm"
-  location              = var.location
-  resource_group_name   = var.resource_group
-  network_interface_ids = [azurerm_network_interface.main.id]
-  vm_size               = var.vm_size
-
+  name                          = "${var.resource_group}-vm"
+  location                      = var.location
+  resource_group_name           = var.resource_group
+  network_interface_ids         = [azurerm_network_interface.main.id]
+  vm_size                       = var.vm_size
+  delete_os_disk_on_termination = true
 
   storage_os_disk {
     name              = "${var.resource_group}-vm"
@@ -81,4 +81,20 @@ resource "azurerm_virtual_machine" "main" {
       key_data = var.ssh_key
     }
   }
+    provisioner "local-exec" {
+    working_dir = "../Ansible"
+    interpreter = ["/bin/bash"]
+    command = "sleep 120; ansible-playbook -i inventory.ini redis-playbook.yml"
+  }
 }
+
+# resource "null_resource" "playbookconfig" {
+#   depends_on = [azurerm_virtual_machine.main]
+# }
+
+# resource "ansible_playbook" "playbook" {
+#   playbook   = "../Ansible/redis-playbook.yml"
+#   name       = "redis"
+#   replayable = true
+
+#   depends_on = [azurerm_virtual_machine.main]
