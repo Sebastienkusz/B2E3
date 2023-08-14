@@ -32,7 +32,6 @@ module "vm" {
   domain_name_label           = local.vm_domain_name_label
   public_ip_sku               = local.public_ip_sku
   subnet_id                   = values(module.vnet.subnet_2_ids)[0]
-
 }
 
 module "gateway" {
