@@ -37,9 +37,7 @@ module "vm" {
 resource "null_resource" "playbookconfig" {
   depends_on = [module.vm]
   provisioner "local-exec" {
-    working_dir = "${path.cwd}/../Ansible"
-    interpreter = ["/bin/bash"]
-    command = "sleep 120; ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook redis-playbook.yml -i inventory.ini"
+    command = "ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook ./../Ansible/redis-playbook.yml -i ./../Ansible/inventory.ini"
   }
 }
 
