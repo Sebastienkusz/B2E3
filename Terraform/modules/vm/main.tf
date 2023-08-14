@@ -81,20 +81,11 @@ resource "azurerm_virtual_machine" "main" {
       key_data = var.ssh_key
     }
   }
-    provisioner "local-exec" {
-    working_dir = "../Ansible"
-    interpreter = ["/bin/bash"]
-    command = "sleep 120; ansible-playbook -i inventory.ini redis-playbook.yml"
-  }
+
+  # provisioner "local-exec" {
+  #   working_dir = "${path.cwd}/../Ansible"
+  #   interpreter = ["/bin/bash"]
+  #   command = "sleep 120; ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook redis-playbook.yml -i inventory.ini"
+  # }
+
 }
-
-# resource "null_resource" "playbookconfig" {
-#   depends_on = [azurerm_virtual_machine.main]
-# }
-
-# resource "ansible_playbook" "playbook" {
-#   playbook   = "../Ansible/redis-playbook.yml"
-#   name       = "redis"
-#   replayable = true
-
-#   depends_on = [azurerm_virtual_machine.main]
