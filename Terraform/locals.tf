@@ -1,12 +1,3 @@
-data "azurerm_resource_group" "main" {
-  name = local.resource_group_name
-}
-
-data "azurerm_ssh_public_key" "vm_key" {
-  name                = "${local.resource_group_name}-key"
-  resource_group_name = data.azurerm_resource_group.main.name
-}
-
 # Variables générales:
 locals {
   subscription_id     = "c56aea2c-50de-4adc-9673-6a8008892c21"
@@ -26,7 +17,7 @@ locals {
 # Variables pour la machine virtuelle
 locals {
   public_ip_allocation_method = "Static"
-  vm_domain_name_label        = "${local.resource_group_name}-vm"
+  vm_domain_name_label        = "${lower(replace("${local.resource_group_name}", "_", ""))}-vm"
   public_ip_sku               = "Standard"
 
   vm_size = "Standard_B1s"
@@ -41,8 +32,8 @@ locals {
   image_version   = "latest"
 
   admin_username = "adminuser"
-  path           = "/home/adminuser/.ssh/authorized_keys"
-  ssh_key        = data.azurerm_ssh_public_key.vm_key.public_key
+  path           = "/home/${local.admin_username}/.ssh/authorized_keys"
+  ssh_key        = tls_private_key.admin_rsa.public_key_openssh
 }
 
 # Variables pour l'application Gateway

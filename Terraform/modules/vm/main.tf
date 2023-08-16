@@ -69,7 +69,7 @@ resource "azurerm_virtual_machine" "main" {
   }
 
   os_profile {
-    computer_name  = "${var.resource_group}-vm"
+    computer_name  = "${replace("${var.resource_group}", "_", "")}-vm"
     admin_username = var.admin_username
   }
 
@@ -81,11 +81,4 @@ resource "azurerm_virtual_machine" "main" {
       key_data = var.ssh_key
     }
   }
-
-  # provisioner "local-exec" {
-  #   working_dir = "${path.cwd}/../Ansible"
-  #   interpreter = ["/bin/bash"]
-  #   command = "sleep 120; ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook redis-playbook.yml -i inventory.ini"
-  # }
-
 }
