@@ -1,0 +1,43 @@
+# .tfstate backup files
+terraform.tfstate.backup
+terraform.tfstate.*.backup
+
+# Local Modules
+.terraform/modules/
+**/.terraform/modules/
+
+# Local Providers
+.terraform/plugins/
+**/.terraform/plugins/
+terraform-provider-*
+.terraform/providers/
+**/.terraform/providers/
+
+# Crash log files
+crash.log
+
+# terraform output
+*.out
+*.plan
+
+# Ignore override files as they are usually used to override resources locally and so
+# are not checked in
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+# MacOS General
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Emacs
+*~
+\#*\#
+/.emacs.desktop
+/.emacs.desktop.lock
+*.elc
+auto-save-list
+tramp
+.\#*

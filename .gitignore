@@ -37,3 +37,6 @@ terraform.rc
 **/lib/*
 
 pyvenv.cfg
+
+# Local ssh key created
+**/ssh_keys/*
