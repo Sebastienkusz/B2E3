@@ -66,8 +66,6 @@ resource "null_resource" "playbookconfig" {
   }
 }
 
-
-
 module "gateway" {
   source                      = "./modules/gateway"
   resource_group              = local.resource_group_name
