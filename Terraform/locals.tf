@@ -63,5 +63,9 @@ locals {
 locals {
   aks_domain_name_label = "${local.resource_group_name}-aks"
   pool_name             = "b2e1gr2pool"
+<<<<<<< HEAD
+  aks_vm_size = "Standard_A2_v2"
+=======
   aks_vm_size           = "Standard_A2_v2"
+>>>>>>> main
 }
