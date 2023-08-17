@@ -22,3 +22,13 @@ provider "azurerm" {
 # Configure the Ansible Provider
 provider "ansible" {
 }
+
+provider "helm" {
+  kubernetes {
+    config_path = "./kubeconfig"
+  }
+}
+
+provider "kubernetes" {
+  config_path = "./kubeconfig"
+}

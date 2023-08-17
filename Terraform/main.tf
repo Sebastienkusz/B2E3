@@ -117,3 +117,21 @@ module "aks" {
   vm_size                     = local.aks_vm_size
   pool_name                   = local.pool_name
 }
+
+resource "local_sensitive_file" "kube_config" {
+  content = module.aks.kube_config
+  filename = "./kubeconfig"
+}
+
+# resource "helm_release" "prometheus" {
+#   name       = "prometheus"
+#   chart      = "prometheus"
+#   repository = "https://prometheus-community.github.io/helm-charts"
+# }
+
+# resource "helm_release" "grafana" {
+#   depends_on = [helm_release.prometheus]
+#   name  = "grafana"
+#   chart = "grafana"
+#   repository = "https://grafana.github.io/helm-charts"
+# }

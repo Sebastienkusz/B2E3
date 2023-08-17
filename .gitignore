@@ -40,3 +40,5 @@ pyvenv.cfg
 
 # Local ssh key created
 **/ssh_keys/*
+
+kubeconfig
