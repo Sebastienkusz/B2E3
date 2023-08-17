@@ -1,3 +1,43 @@
+# b2e1-gr2
+--------------------
+### 0 - Prérequis
+
+Avoir installé sur le poste :
+  Terraform : version 1.5.4
+  Python    : version 3
+  Ansible   : version utilisée core [core 2.15.1]
+
+--------------------
+### 1 - Lancement de Terraform
+
+On se place dans le dossier Terraform
+
+Avant de lancer déploiement de l'infrasctructure, il faut déployer le backend distant pour Terraform
+
+- Backend Terraform
+
+on se place dans le dossier backend
+
+    terraform init
+
+    terraform apply
+
+- Déploiement infrastructure
+
+on revient dans le dossier Terraform (niveau -1)
+
+    terraform init
+
+    terraform apply
+
+
+Si **terraform** est déjà déployé par un collègue, il faut lancer un **terraform apply** pour générer certains fichiers :
+
+    terraform apply -target local_file.inventory -target local_file.admin_rsa_file
+
+---------------------
+
+
 ### Prometheus
 
 NAME: prometheus
