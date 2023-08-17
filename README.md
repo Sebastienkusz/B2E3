@@ -3,9 +3,10 @@
 ### 0 - Prérequis
 
 Avoir installé sur le poste :
-  Terraform : version 1.5.4
-  Python    : version 3
-  Ansible   : version utilisée core [core 2.15.1]
+- Terraform : version 1.5.4
+- Python    : version 3
+- Ansible   : version utilisée core [core 2.15.1]
+- Helm      : version 3.12.3
 
 --------------------
 ### 1 - Lancement de Terraform
@@ -33,7 +34,7 @@ on revient dans le dossier Terraform (niveau -1)
 
 Si **terraform** est déjà déployé par un collègue, il faut lancer un **terraform apply** pour générer certains fichiers :
 
-    terraform apply -target local_file.inventory -target local_file.admin_rsa_file
+    terraform apply -target local_file.inventory -target local_file.admin_rsa_file -target local_sensitive_file.kube_config
 
 ---------------------
 
