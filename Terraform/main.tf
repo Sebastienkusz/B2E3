@@ -62,9 +62,30 @@ resource "null_resource" "playbookconfig" {
   provisioner "local-exec" {
     working_dir = "${path.root}/../Ansible"
     interpreter = [ "bash", "-c" ]
-    command = "ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook redis-playbook.yml -i inventory.ini"
+    command = "sleep 60; ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook redis-playbook.yml -i inventory.ini"
   }
 }
+
+# resource "ansible_host" "main" {
+#   name   = module.vm.vm_fqdn
+#   groups = ["redis"]
+#   variables = {
+#     ansible_connection           = "ssh",
+#     ansible_ssh_user             = "${local.admin_username}",
+#     ansible_ssh_private_key_file = "${local_file.admin_rsa_file.filename}",
+#     ansible_ssh_host             = "${module.vm.vm_fqdn}"
+#     ansible_become               = true,
+#     ansible_python_interpreter   = "/usr/bin/python3",
+#     ansible_ssh_extra_args       = "-o StrictHostKeyChecking=no"
+#   }
+# }
+
+# resource "ansible_playbook" "playbook" {
+#   depends_on = [module.vm]
+#   playbook   = "./test-playbook.yml"
+#   name       = ansible_host.main.name
+# }
+
 
 module "gateway" {
   source                      = "./modules/gateway"
