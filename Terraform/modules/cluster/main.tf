@@ -1,6 +1,6 @@
 # Création de l'adresse IP publique du cluster
 resource "azurerm_public_ip" "main" {
-  name                = "${var.resource_group}-aks-ip"
+  name                = "${var.resource_group}-${var.cluster_name}-ip"
   location            = var.location
   resource_group_name = var.resource_group
   domain_name_label   = var.domain_name_label
@@ -10,7 +10,7 @@ resource "azurerm_public_ip" "main" {
 
 # Création du groupe de sécurité réseau pour la passerelle d'application
 resource "azurerm_network_security_group" "main" {
-  name                = "${var.resource_group}-aks-nsg"
+  name                = "${var.resource_group}-${var.cluster_name}-nsg"
   location            = var.location
   resource_group_name = var.resource_group
 }
@@ -36,16 +36,16 @@ resource "azurerm_subnet_network_security_group_association" "main" {
 }
 
 resource "azurerm_user_assigned_identity" "main" {
-  name                = "${var.resource_group}-identity"
+  name                = "${var.resource_group}-${var.cluster_name}-identity"
   location            = var.location
   resource_group_name = var.resource_group
 }
 
 resource "azurerm_kubernetes_cluster" "main" {
-  name                = "${var.resource_group}-aks"
+  name                = "${var.resource_group}-${var.cluster_name}"
   location            = var.location
   resource_group_name = var.resource_group
-  dns_prefix          = "${var.resource_group}-aks"
+  dns_prefix          = "${var.resource_group}-${var.cluster_name}"
 
   default_node_pool {
     name            = var.pool_name
