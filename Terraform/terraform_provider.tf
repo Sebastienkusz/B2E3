@@ -25,10 +25,10 @@ provider "ansible" {
 
 provider "helm" {
   kubernetes {
-    config_path = "./kubeconfig"
+    config_path = pathexpand("./kubeconfig")
   }
 }
 
 provider "kubernetes" {
-  config_path = "./kubeconfig"
+  config_path =  pathexpand("./kubeconfig")
 }

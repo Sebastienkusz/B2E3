@@ -1,0 +1,6 @@
+# Use an existing secret for the admin user.
+admin:
+  ## Name of the secret. Can be templated.
+  existingSecret: "${admin_existing_secret}"
+  userKey: ${admin_user_key}
+  passwordKey: ${admin_password_key}

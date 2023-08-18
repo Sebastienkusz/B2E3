@@ -46,3 +46,9 @@ variable "pool_name" {
   description = "(Required) Name of the node pool"
   nullable    = false
 }
+
+variable "cluster_name" {
+  type        = string
+  description = "(Required) Name of the cluster"
+  nullable    = false
+}

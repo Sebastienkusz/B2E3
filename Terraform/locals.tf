@@ -9,7 +9,7 @@ locals {
 # Network variables
 locals {
   network_europe = ["10.1.0.0/16"]
-  subnets_europe = ["10.1.1.0/24", "10.1.2.0/24"]
+  subnets_europe = ["10.1.1.0/24", "10.1.2.0/24", "10.1.3.0/24"]
   network_wus    = ["10.10.0.0/16"]
   subnets_wus    = ["10.10.0.0/24"]
 }
@@ -52,7 +52,16 @@ locals {
 
 # Variables pour le cluster AKS
 locals {
-  aks_domain_name_label = "${local.resource_group_name}-aks"
+  aks_name              = "aks"
+  aks_domain_name_label = "${local.resource_group_name}-${local.aks_name}"
   pool_name             = "b2e1gr2pool"
   aks_vm_size           = "Standard_A2_v2"
+}
+
+# Pour test
+locals {
+  aks2_name              = "aks2"
+  aks2_domain_name_label = "${local.resource_group_name}-${local.aks2_name}"
+  pool2_name             = "b2e1gr2pool2"
+  aks2_vm_size           = "Standard_A2_v2"
 }
