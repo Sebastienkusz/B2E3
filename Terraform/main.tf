@@ -124,25 +124,9 @@ module "aks" {
 #   filename = "./kubeconfig"
 # }
 
-# # Pour test ------------------------------------------------------------------
-# module "aks2" {
-#   source                      = "./modules/cluster"
-#   cluster_name                = local.aks2_name
-#   resource_group              = local.resource_group_name
-#   location                    = local.location
-#   public_ip_allocation_method = local.public_ip_allocation_method
-#   domain_name_label           = local.aks2_domain_name_label
-#   public_ip_sku               = local.public_ip_sku
-#   subnet_id                   = values(module.vnet.subnet_1_ids)[2]
-#   vm_size                     = local.aks2_vm_size
-#   pool_name                   = local.pool2_name
-# }
-
-# resource "local_sensitive_file" "kube_config2" {
-#   content = module.aks2.kube_config
-#   filename = "./kubeconfig2"
-# }
-# # -----------------------------------------------------------------------------
+resource "random_password" "grafana" {
+  length = 24
+}
 
 resource "helm_release" "prometheus" {
   depends_on       = [module.aks]
@@ -171,21 +155,6 @@ resource "helm_release" "prometheus" {
     name  = "server.persistentVolume.enabled"
     value = false
   }
-}
-
-# resource "kubernetes_secret" "grafana" {
-#   metadata {
-#     name      = "grafana"
-#   }
-
-#   data = {
-#     admin-user     = "admin"
-#     admin-password = random_password.grafana.result
-#   }
-# }
-
-resource "random_password" "grafana" {
-  length = 24
 }
 
 resource "helm_release" "grafana" {
