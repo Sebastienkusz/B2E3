@@ -62,7 +62,7 @@ resource "null_resource" "playbookconfig" {
   provisioner "local-exec" {
     working_dir = "${path.root}/../Ansible"
     interpreter = ["bash", "-c"]
-    command     = "sleep 60; ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook redis-playbook.yml -i inventory.ini"
+    command     = "sleep 100; ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook redis-playbook.yml -i inventory.ini"
   }
 }
 
