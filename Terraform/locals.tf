@@ -9,7 +9,7 @@ locals {
 # Network variables
 locals {
   network_europe = ["10.1.0.0/16"]
-  subnets_europe = ["10.1.1.0/24", "10.1.2.0/24", "10.1.3.0/24"]
+  subnets_europe = ["10.1.1.0/24", "10.1.2.0/24"]
   network_wus    = ["10.10.0.0/16"]
   subnets_wus    = ["10.10.0.0/24"]
 }

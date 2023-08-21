@@ -1,5 +1,5 @@
 output "pass" {
-  value = random_password.grafana.result
+  value     = random_password.grafana.result
   sensitive = true
 }
 
