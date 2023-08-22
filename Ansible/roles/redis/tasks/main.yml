@@ -24,7 +24,6 @@
 - name: create node exporter user
   user:
     name: "{{ node_exporter_user }}"
-    groups: "{{ node_exporter_group }}"
     append: true
     shell: /usr/sbin/nologin
     system: true
