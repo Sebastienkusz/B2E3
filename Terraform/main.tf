@@ -126,6 +126,7 @@ module "aks" {
 
 resource "random_password" "grafana" {
   length = 24
+  override_special = "!#$@_"
 }
 
 resource "helm_release" "prometheus" {
