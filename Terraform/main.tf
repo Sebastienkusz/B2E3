@@ -126,6 +126,7 @@ module "aks" {
 
 resource "random_password" "grafana" {
   length = 24
+  override_special = "@#"
 }
 
 resource "helm_release" "prometheus" {
@@ -137,12 +138,12 @@ resource "helm_release" "prometheus" {
   repository       = "https://prometheus-community.github.io/helm-charts"
 
   set {
-    name  = "adminUser"
+    name  = "admin-user"
     value = "admin"
   }
 
   set {
-    name  = "adminPassword"
+    name  = "admin-password"
     value = random_password.grafana.result
   }
 
