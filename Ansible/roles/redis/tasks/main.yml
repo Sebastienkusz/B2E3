@@ -14,7 +14,7 @@
     owner: redis
     group: redis 
     mode: 0644
-  notify: ["Redis_Restart"]
+  notify: [ "redis_restart" ]
 
 - name: check if node exporter exist
   stat:
@@ -71,7 +71,7 @@
     owner: root
     group: root
     mode: 0755
-  notify: ["reload_daemon_and_restart_node_exporter"]
+  notify: [ "reload_daemon_and_restart_node_exporter" ]
 
 - meta: flush_handlers
 
