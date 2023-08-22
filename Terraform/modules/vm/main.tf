@@ -47,7 +47,7 @@ resource "azurerm_network_security_rule" "main" {
 }
 
 # Règle de sécurité pour le port Redis depuis n'importe quelle source sur le serveur Redis
-resource "azurerm_network_security_rule" "main" {
+resource "azurerm_network_security_rule" "main2" {
   name                        = "Allow-Redis-Inbound"
   priority                    = 150
   direction                   = "Inbound"
