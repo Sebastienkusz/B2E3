@@ -124,11 +124,6 @@ module "aks" {
 #   filename = "./kubeconfig"
 # }
 
-resource "random_password" "grafana" {
-  length = 24
-  override_special = "@#"
-}
-
 resource "helm_release" "prometheus" {
   depends_on       = [module.aks]
   chart            = "prometheus"
@@ -136,16 +131,6 @@ resource "helm_release" "prometheus" {
   create_namespace = true
   namespace        = "monitoring"
   repository       = "https://prometheus-community.github.io/helm-charts"
-
-  set {
-    name  = "admin-user"
-    value = "admin"
-  }
-
-  set {
-    name  = "admin-password"
-    value = random_password.grafana.result
-  }
 
   set {
     name  = "podSecurityPolicy.enabled"
@@ -158,6 +143,11 @@ resource "helm_release" "prometheus" {
   }
 }
 
+resource "random_password" "grafana" {
+  length = 24
+  override_special = "@#"
+}
+
 resource "helm_release" "grafana" {
   depends_on = [module.aks, helm_release.prometheus]
   name       = "grafana"
@@ -165,11 +155,13 @@ resource "helm_release" "grafana" {
   namespace  = "monitoring"
   repository = "https://grafana.github.io/helm-charts"
 
-  values = [
-    templatefile("${path.module}/templates/grafana-values.yaml", {
-      admin_user_key     = "admin-user"
-      admin_password_key = "admin-password"
-      replicas = 1
-    })
-  ]
+    set {
+    name  = "adminUser"
+    value = "admin"
+  }
+
+  set {
+    name  = "adminPassword"
+    value = random_password.grafana.result
+  }
 }
