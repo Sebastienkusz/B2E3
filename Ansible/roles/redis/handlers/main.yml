@@ -5,6 +5,9 @@
     daemon_reload: yes
     enabled: yes
 
-- name: Redis Restart
-  service: name=redis-server state=restarted enabled=yes
-  sudo: true
+- name: Redis_Restart
+  service: 
+    name: redis-server 
+    state: restarted 
+    enabled: yes
+  
