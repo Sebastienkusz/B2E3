@@ -39,7 +39,22 @@ resource "azurerm_network_security_rule" "main" {
   access                      = "Allow"
   protocol                    = "Tcp"
   source_port_range           = "*"
-  destination_port_range      = "22"
+  destination_port_range      = var.ssh_port
+  source_address_prefix       = "*"
+  destination_address_prefix  = azurerm_network_interface.main.private_ip_address
+  resource_group_name         = var.resource_group
+  network_security_group_name = azurerm_network_security_group.main.name
+}
+
+# Règle de sécurité pour le port Redis depuis n'importe quelle source sur le serveur Redis
+resource "azurerm_network_security_rule" "main" {
+  name                        = "Allow-Redis-Inbound"
+  priority                    = 150
+  direction                   = "Inbound"
+  access                      = "Allow"
+  protocol                    = "Tcp"
+  source_port_range           = "*"
+  destination_port_range      = var.redis_port
   source_address_prefix       = "*"
   destination_address_prefix  = azurerm_network_interface.main.private_ip_address
   resource_group_name         = var.resource_group
