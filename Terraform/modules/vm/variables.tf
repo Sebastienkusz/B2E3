@@ -97,3 +97,17 @@ variable "subnet_id" {
   description = "(Required) VM subnet ID"
   nullable    = false
 }
+
+variable "ssh_port" {
+  type        = string
+  description = "SSH Port"
+  nullable    = false
+  default     = "22"
+}
+
+variable "redis_port" {
+  type        = string
+  description = "Redis Port"
+  nullable    = false
+  default     = "6379"
+}
