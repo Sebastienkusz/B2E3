@@ -11,8 +11,8 @@
   template: 
     src: redis.conf.j2 
     dest: /etc/redis/redis.conf 
-    owner: root 
-    group: root 
+    owner: redis
+    group: redis 
     mode: 0644
   notify: ["Redis_Restart"]
 
