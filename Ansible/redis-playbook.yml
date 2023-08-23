@@ -3,4 +3,5 @@
   become: true
   roles:
     - redis
+    - node
     - users
