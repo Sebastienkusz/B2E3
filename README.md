@@ -111,3 +111,35 @@ NOTES:
 ######   WARNING: Persistence is disabled!!! You will lose your data when   #####
 ######            the Grafana pod is terminated.                            #####
 #################################################################################
+
+
+
+---------------------
+
+
+### Test
+
+Pour la phase 1, nous pouvons tester le fonctionnement de Redis et de grafana
+
+- Pour Redis, 
+nous allons installer redis-tools en local :  
+  sudo apt-get update
+  sudo apt install redis-tools
+
+Puis lancer la commande suivant afin de vérifier la communication avec le serveur Redis :
+  redis-cli -h b2e1-gr2-vm.westus.cloudapp.azure.com PING
+
+si la réponse est PONG, c'est gagné
+
+- Pour Grafana,
+nous allons récupérer les configurations du cluster avec la commande :
+  az aks get-credentials --resource-group b2e1-gr2 --name b2e1-gr2-aks -f ~/.kube/config
+
+nous allons ensuite récupérer le mot de passe de grafana :
+  terraform output pass
+
+Puis, connexion au serveur distant avec :
+  kubectl port-forward svc/grafana 3000:80 --namespace="monitoring"
+
+et avec un navigateur internet, nous allons sur la page :
+  localhost:3000

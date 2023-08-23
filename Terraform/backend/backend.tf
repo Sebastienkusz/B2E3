@@ -19,27 +19,7 @@ resource "azurerm_storage_container" "tfstate" {
   container_access_type = "private"
 }
 
-# # Create backend.tf
-# resource "local_file" "backend" {
-#   filename        = "${path.root}/../backend.tf"
-#   file_permission = "0644"
-#   content         = <<-EOT
-# terraform {
-#   backend "azurerm" {
-#     resource_group_name  = "${local.resource_group_name}"
-#     storage_account_name = "${lower(replace("${local.resource_group_name}", "-", ""))}tfstate"
-#     container_name       = "tfstate"
-#     key                  = "${local.resource_group_name}/terraform.tfstate"
-#   }
-# }
-# EOT
-
-#   depends_on = [
-#     azurerm_storage_container.tfstate
-#   ]
-# }
-
-# Create backend.tf
+# Create backend.tf in Terraform folder
 resource "local_file" "backend" {
   filename        = "${path.root}/../backend.tf"
   file_permission = "0644"
