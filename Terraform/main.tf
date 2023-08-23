@@ -66,27 +66,6 @@ resource "null_resource" "playbookconfig" {
   }
 }
 
-# resource "ansible_host" "main" {
-#   name   = module.vm.vm_fqdn
-#   groups = ["redis"]
-#   variables = {
-#     ansible_connection           = "ssh",
-#     ansible_ssh_user             = "${local.admin_username}",
-#     ansible_ssh_private_key_file = "${local_file.admin_rsa_file.filename}",
-#     ansible_ssh_host             = "${module.vm.vm_fqdn}"
-#     ansible_become               = true,
-#     ansible_python_interpreter   = "/usr/bin/python3",
-#     ansible_ssh_extra_args       = "-o StrictHostKeyChecking=no"
-#   }
-# }
-
-# resource "ansible_playbook" "playbook" {
-#   depends_on = [module.vm]
-#   playbook   = "./test-playbook.yml"
-#   name       = ansible_host.main.name
-# }
-
-
 module "gateway" {
   source                      = "./modules/gateway"
   resource_group              = local.resource_group_name
@@ -118,11 +97,6 @@ module "aks" {
   vm_size                     = local.aks_vm_size
   pool_name                   = local.pool_name
 }
-
-# resource "local_sensitive_file" "kube_config" {
-#   content = module.aks.kube_config
-#   filename = "./kubeconfig"
-# }
 
 resource "helm_release" "prometheus" {
   depends_on       = [module.aks]

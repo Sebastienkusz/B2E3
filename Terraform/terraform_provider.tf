@@ -6,10 +6,6 @@ terraform {
       source  = "hashicorp/azurerm"
       version = "=3.62.1"
     }
-    ansible = {
-      source  = "ansible/ansible"
-      version = "~> 1.1.0"
-    }
   }
 }
 
@@ -17,10 +13,6 @@ terraform {
 provider "azurerm" {
   features {}
   subscription_id = local.subscription_id
-}
-
-# Configure the Ansible Provider
-provider "ansible" {
 }
 
 provider "helm" {
