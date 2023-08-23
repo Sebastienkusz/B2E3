@@ -31,10 +31,29 @@ locals {
   image_sku       = "22_04-lts-gen2"
   image_version   = "latest"
 
+  ip_simplon = "82.126.234.200"
+
   admin_username = "adminuser"
   path           = "/home/${local.admin_username}/.ssh/authorized_keys"
   ssh_key        = tls_private_key.admin_rsa.public_key_openssh
+
+  list_ip_filter = concat([ for user_value in local.users : user_value.ip ],[local.ip_simplon])
 }
+
+# Add users 
+locals {
+  users = {
+    antoine = {
+      sshkey = "antoine"
+      ip     = "90.50.33.147"
+    }
+    sebastien = {
+      sshkey = "sebastien"
+      ip     = "83.195.211.184"
+    }
+  }
+}
+
 
 # Variables pour l'application Gateway
 locals {

@@ -9,3 +9,10 @@ resource "local_file" "admin_rsa_file" {
   file_permission = "0600"
   content         = tls_private_key.admin_rsa.private_key_openssh
 }
+
+# Random password
+resource "random_password" "users_vm" {
+  length           = 16
+  special          = true
+  override_special = "!#$%_"
+}

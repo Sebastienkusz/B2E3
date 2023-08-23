@@ -27,6 +27,7 @@ module "vm" {
   admin_username = local.admin_username
   path           = local.path
   ssh_key        = local.ssh_key
+  ssh_ip_filter  = local.list_ip_filter
 
   public_ip_allocation_method = local.public_ip_allocation_method
   domain_name_label           = local.vm_domain_name_label
@@ -51,10 +52,6 @@ ansible_connection=ssh
 ansible_ssh_user=${local.admin_username}
 ansible_become=true
 EOT
-
-  depends_on = [
-    local_file.admin_rsa_file
-  ]
 }
 
 resource "null_resource" "playbookconfig" {
