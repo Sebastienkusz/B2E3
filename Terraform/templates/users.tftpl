@@ -1,0 +1,8 @@
+---
+
+# Users
+users:
+%{ for user_name, user_value in tpl_users ~}
+  - { name: "${user_name}", sshkey: "${user_value.sshkey}" } 
+%{ endfor ~}
+tmp_password: "${tpl_random_password}"

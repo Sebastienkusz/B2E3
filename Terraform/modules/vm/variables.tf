@@ -105,6 +105,13 @@ variable "ssh_port" {
   default     = "22"
 }
 
+variable "ssh_ip_filter" {
+  type        = list
+  description = "List of IP available to connect with ssh"
+  nullable    = false
+  default     = []
+}
+
 variable "redis_port" {
   type        = string
   description = "Redis Port"

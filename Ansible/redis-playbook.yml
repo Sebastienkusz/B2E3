@@ -4,3 +4,4 @@
   roles:
     - redis
     - node
+    - users

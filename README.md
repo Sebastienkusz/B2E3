@@ -9,6 +9,14 @@ Avoir installé sur le poste :
 - Helm      : version 3.12.3
 
 --------------------
+### Variables à changer
+
+Dans le dossier ./Terraform => fichier locals.tf
+Dans le dossier ./Terraform/backend => fichier locals.tf
+
+Ajouter les clés publiques ssh dans le dossier ./Terraform/ssh_keys/
+
+--------------------
 ### 1 - Lancement de Terraform
 
 On se place dans le dossier Terraform
