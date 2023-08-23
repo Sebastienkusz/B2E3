@@ -16,6 +16,8 @@ Dans le dossier ./Terraform/backend => fichier locals.tf
 
 Ajouter les clés publiques ssh dans le dossier ./Terraform/ssh_keys/
 
+__Attention__ : Nommer la clé ssh de la même façon dans le fichier locals.tf (sans l'extension .pub)
+
 --------------------
 ### 1 - Lancement de Terraform
 
