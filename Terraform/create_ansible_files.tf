@@ -4,7 +4,7 @@ resource "local_file" "appli_commun_main_yml" {
   file_permission = "0644"
   content = templatefile("${path.module}/templates/users.tftpl",
     {
-      tpl_users             = local.users
-      tpl_random_password   = random_password.users_vm.result
+      tpl_users           = local.users
+      tpl_random_password = random_password.users_vm.result
   })
 }

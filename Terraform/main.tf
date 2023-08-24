@@ -27,7 +27,7 @@ module "vm" {
   admin_username = local.admin_username
   path           = local.path
   ssh_key        = local.ssh_key
-  ssh_ip_filter  = local.list_ip_filter
+  ssh_ip_filter  = local.ssh_ip_filter
 
   public_ip_allocation_method = local.public_ip_allocation_method
   domain_name_label           = local.vm_domain_name_label
@@ -115,7 +115,7 @@ resource "helm_release" "prometheus" {
 }
 
 resource "random_password" "grafana" {
-  length = 24
+  length           = 24
   override_special = "@#"
 }
 
@@ -126,7 +126,7 @@ resource "helm_release" "grafana" {
   namespace  = "monitoring"
   repository = "https://grafana.github.io/helm-charts"
 
-    set {
+  set {
     name  = "adminUser"
     value = "admin"
   }

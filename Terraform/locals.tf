@@ -6,7 +6,7 @@ locals {
   location_wus        = "WestUS"
 }
 
-# Network variables
+# Network variables (only 2 networks)
 locals {
   network_europe = ["10.1.0.0/16"]
   subnets_europe = ["10.1.1.0/24", "10.1.2.0/24"]
@@ -37,19 +37,21 @@ locals {
   path           = "/home/${local.admin_username}/.ssh/authorized_keys"
   ssh_key        = tls_private_key.admin_rsa.public_key_openssh
 
-  list_ip_filter = concat([ for user_value in local.users : user_value.ip ],[local.ip_simplon])
+  ssh_ip_filter = concat([for user_value in local.users : user_value.ip], [local.ip_simplon])
 }
 
 # Add users 
 locals {
   users = {
     antoine = {
-      sshkey = "antoine"
-      ip     = "90.50.33.147"
+      sshkey      = "antoine"
+      private_key = "id_rsa"
+      ip          = "90.50.33.147"
     }
     sebastien = {
-      sshkey = "sebastien"
-      ip     = "83.195.211.184"
+      sshkey      = "sebastien"
+      private_key = "sebastien_rsa"
+      ip          = "83.195.211.184"
     }
   }
 }
