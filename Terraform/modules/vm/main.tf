@@ -47,7 +47,7 @@ resource "azurerm_network_security_rule" "ssh" {
 }
 
 # Règle de sécurité pour le port Redis depuis n'importe quelle source sur le serveur Redis
-resource "azurerm_network_security_rule" "ip_filter" {
+resource "azurerm_network_security_rule" "redis" {
   name                        = "Allow-Redis-Inbound"
   priority                    = 150
   direction                   = "Inbound"
