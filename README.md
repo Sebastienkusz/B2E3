@@ -131,4 +131,4 @@ et avec un navigateur internet, nous allons sur la page :
 - 1 **Load balancer (gateway)**		       (b2e1-gr2-gateway) 
 ---------------------
 ## Topologie
-![b2e1-gr2.svg](/topologie/b2e1-gr2.svg)
+![topologie](/topologie/b2e1-gr2.svg)
