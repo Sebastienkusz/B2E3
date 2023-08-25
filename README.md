@@ -126,7 +126,6 @@ NOTES:
 
 ---------------------
 
-
 ### Test
 
 Pour la phase 1, nous pouvons tester le fonctionnement de Redis et de grafana
@@ -153,3 +152,21 @@ Puis, connexion au serveur distant avec :
 
 et avec un navigateur internet, nous allons sur la page :
   localhost:3000
+
+
+---------------------
+
+## Liste des ressources
+- 1 **compte de stockage backend terraform** 		           (b2e1gr2******)
+- 1 **clé ssh** créé aléatoirement + Clés admins supplémentaires (Antoine et Seb) 
+- 2 **réseaux virtuels** 			           (b2e1-gr2-vnet-westeurope / westus) 
+- 1 **sous-réseau** pour westus      (b2e1-gr2-subnet-0) 
+- 1 **sous-réseau**	pour westeurope  (b2e1-sr2-subnet-0) 
+- 1 **sous-réseau** pour westeurope  (b2e1-gr2-subnet-1) 
+- 3 **NSG** 					           (b2e1-gr2-vm-nsg / b2e1-gr2-aks-nsg)
+- 1 **VM Linux (Redis)** 		       (b2e1-gr2-vm) 
+- 1 **Cluster Kubernetes (AKS)** 		(b2e1-gr2-aks) 
+- 1 **Load balancer (gateway)**		       (b2e1-gr2-gateway) 
+---------------------
+## Topologie
+![topologie](/topologie/b2e1-gr2.svg)

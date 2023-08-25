@@ -56,7 +56,6 @@ locals {
   }
 }
 
-
 # Variables pour l'application Gateway
 locals {
   app_domain_name_label = "${local.resource_group_name}-gateway"
@@ -77,12 +76,4 @@ locals {
   aks_domain_name_label = "${local.resource_group_name}-${local.aks_name}"
   pool_name             = "b2e1gr2pool"
   aks_vm_size           = "Standard_A2_v2"
-}
-
-# Pour test
-locals {
-  aks2_name              = "aks2"
-  aks2_domain_name_label = "${local.resource_group_name}-${local.aks2_name}"
-  pool2_name             = "b2e1gr2pool2"
-  aks2_vm_size           = "Standard_A2_v2"
 }
