@@ -17,7 +17,7 @@ locals {
 # Variables pour la machine virtuelle
 locals {
   public_ip_allocation_method = "Static"
-  vm_domain_name_label        = "${lower(replace("${local.resource_group_name}", "_", ""))}-vm"
+  vm_domain_name_label        = "${lower(replace(local.resource_group_name, "_", ""))}-vm"
   public_ip_sku               = "Standard"
 
   vm_size = "Standard_B1s"
