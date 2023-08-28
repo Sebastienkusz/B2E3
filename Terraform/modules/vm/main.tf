@@ -84,7 +84,7 @@ resource "azurerm_virtual_machine" "main" {
   }
 
   os_profile {
-    computer_name  = "${replace("${var.resource_group}", "_", "")}-vm"
+    computer_name  = "${replace(var.resource_group, "_", "")}-vm"
     admin_username = var.admin_username
   }
 

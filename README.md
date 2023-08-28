@@ -84,6 +84,31 @@ On peut également récupérer l'URL du serveur Prometheus via les commandes:
 On peut ensuite se connecter via l'utilisateur **admin** et le mot de passe obtenu précedemment.
 
 ---------------------
+### 2 - Phase 2 - installation d'un Linteur
+
+Nous allons utiliser tflint 
+
+pour ceci, nous devons avoir unzip d'installé sur le poste.
+Si ce n'est le cas : 
+
+    sudo apt install unzip
+
+le dépot du linteur est : https://github.com/terraform-linters/tflint
+
+Dans le readme, il est indiqué d'installer le linteur avec la commande :
+
+    curl -s https://raw.githubusercontent.com/terraform-linters/tflint/master/install_linux.sh | bash
+
+Il faut créer un fichier .tflint.hcl dans le dossier Terraform dans lequel on configure les règles de vérification.
+
+Puis lancer les commandes :
+
+    tflint --init
+
+    tflint --recursive
+
+
+---------------------
 
 ### Test
 
