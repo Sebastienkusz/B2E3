@@ -39,6 +39,4 @@ terraform.rc
 pyvenv.cfg
 
 # Local ssh key created
-**/ssh_keys/*
-
-kubeconfig
+**/ssh_keys/adminuser
