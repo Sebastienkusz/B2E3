@@ -14,7 +14,7 @@ resource "azurerm_storage_account" "tfstate" {
 }
 
 resource "azurerm_storage_container" "tfstate" {
-  name                  = "tfstate"   #lower("${random_string.resource_code.result}")
+  name                  = "tfstate" #lower("${random_string.resource_code.result}")
   storage_account_name  = azurerm_storage_account.tfstate.name
   container_access_type = "private"
 }
