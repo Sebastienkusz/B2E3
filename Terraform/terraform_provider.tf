@@ -15,3 +15,4 @@ provider "helm" {
     cluster_ca_certificate = base64decode(module.aks.kube_config[0].cluster_ca_certificate)
   }
 }
+

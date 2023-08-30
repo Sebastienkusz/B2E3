@@ -41,11 +41,34 @@ resource "azurerm_user_assigned_identity" "main" {
   resource_group_name = var.resource_group
 }
 
+resource "azurerm_role_assignment" "ra1" {
+  scope                = var.subnet_id
+  role_definition_name = "Network Contributor"
+  principal_id         = azurerm_kubernetes_cluster.main.kubelet_identity[0].object_id
+}
+
+resource "azurerm_role_assignment" "ra3" {
+  scope                = var.gateway_id
+  role_definition_name = "Contributor"
+  principal_id         = azurerm_user_assigned_identity.main.principal_id
+}
+
+resource "azurerm_role_assignment" "ra4" {
+  scope                = var.resource_group_id
+  role_definition_name = "Reader"
+  principal_id         = azurerm_user_assigned_identity.main.principal_id
+}
+
 resource "azurerm_kubernetes_cluster" "main" {
   name                = "${var.resource_group}-${var.cluster_name}"
   location            = var.location
   resource_group_name = var.resource_group
   dns_prefix          = "${var.resource_group}-${var.cluster_name}"
+  node_resource_group = "${var.resource_group}-${var.cluster_name}-node"
+
+  ingress_application_gateway {
+    gateway_id = var.gateway_id
+  }
 
   default_node_pool {
     name            = var.pool_name
@@ -58,6 +81,7 @@ resource "azurerm_kubernetes_cluster" "main" {
 
   network_profile {
     network_plugin    = "kubenet"
+    network_policy    = "calico"
     load_balancer_sku = "standard"
   }
 

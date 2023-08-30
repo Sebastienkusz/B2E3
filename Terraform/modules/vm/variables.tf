@@ -106,7 +106,7 @@ variable "ssh_port" {
 }
 
 variable "ssh_ip_filter" {
-  type        = list
+  type        = list(any)
   description = "List of IP available to connect with ssh"
   nullable    = false
   default     = []

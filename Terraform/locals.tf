@@ -4,6 +4,7 @@ locals {
   resource_group_name = "b2e1-gr2"
   location            = data.azurerm_resource_group.main.location
   location_wus        = "WestUS"
+  tenant_id           = "16763265-1998-4c96-826e-c04162b1e041"
 }
 
 # Network variables (only 2 networks)

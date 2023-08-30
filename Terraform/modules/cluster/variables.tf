@@ -1,12 +1,18 @@
 variable "resource_group" {
   type        = string
-  description = "(Required) The name of the resource group in which to create the virtual network."
+  description = "(Required) The name of the resource group in which to create the cluster."
+  nullable    = false
+}
+
+variable "resource_group_id" {
+  type        = string
+  description = "(Required) The ID of the resource group in which to create the cluster."
   nullable    = false
 }
 
 variable "location" {
   type        = string
-  description = "(Required) The location/region where the virtual network is created. Changing this forces a new resource to be created."
+  description = "(Required) The location/region where the cluster is created. Changing this forces a new resource to be created."
   nullable    = false
   default     = "westeurope"
 }
@@ -50,5 +56,11 @@ variable "pool_name" {
 variable "cluster_name" {
   type        = string
   description = "(Required) Name of the cluster"
+  nullable    = false
+}
+
+variable "gateway_id" {
+  type        = string
+  description = "(Required) ID of the Application Gateway"
   nullable    = false
 }
