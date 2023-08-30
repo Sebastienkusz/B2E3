@@ -93,6 +93,8 @@ module "aks" {
   subnet_id                   = values(module.vnet.subnet_1_ids)[1]
   vm_size                     = local.aks_vm_size
   pool_name                   = local.pool_name
+  gateway_id                  = module.gateway.gateway_id
+  resource_group_id           = data.azurerm_resource_group.main.id
 }
 
 resource "helm_release" "prometheus" {
