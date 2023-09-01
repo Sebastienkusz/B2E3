@@ -30,11 +30,12 @@ appgw:
 # Specify the authentication with Azure Resource Manager
 #
 # Two authentication methods are available:
-
-## Alternatively you can use Service Principal credentials
+# - Option 1: AAD-Pod-Identity (https://github.com/Azure/aad-pod-identity)
 armAuth:
-    type: servicePrincipal
-    secretJSON: ewogICJjbGllbnRJZCI6ICJkMTMxMmYyNS1kOWZjLTQwZTUtODlmOC0zZjNlNjE0NjI2MzIiLAogICJjbGllbnRTZWNyZXQiOiAiSG1QOFF+MnZCUlJSdlZXY1VqLmhUWloua2F6dHF2akszY2tnQmJOdiIsCiAgInN1YnNjcmlwdGlvbklkIjogImM1NmFlYTJjLTUwZGUtNGFkYy05NjczLTZhODAwODg5MmMyMSIsCiAgInRlbmFudElkIjogIjE2NzYzMjY1LTE5OTgtNGM5Ni04MjZlLWMwNDE2MmIxZTA0MSIsCiAgImFjdGl2ZURpcmVjdG9yeUVuZHBvaW50VXJsIjogImh0dHBzOi8vbG9naW4ubWljcm9zb2Z0b25saW5lLmNvbSIsCiAgInJlc291cmNlTWFuYWdlckVuZHBvaW50VXJsIjogImh0dHBzOi8vbWFuYWdlbWVudC5henVyZS5jb20vIiwKICAiYWN0aXZlRGlyZWN0b3J5R3JhcGhSZXNvdXJjZUlkIjogImh0dHBzOi8vZ3JhcGgud2luZG93cy5uZXQvIiwKICAic3FsTWFuYWdlbWVudEVuZHBvaW50VXJsIjogImh0dHBzOi8vbWFuYWdlbWVudC5jb3JlLndpbmRvd3MubmV0Ojg0NDMvIiwKICAiZ2FsbGVyeUVuZHBvaW50VXJsIjogImh0dHBzOi8vZ2FsbGVyeS5henVyZS5jb20vIiwKICAibWFuYWdlbWVudEVuZHBvaW50VXJsIjogImh0dHBzOi8vbWFuYWdlbWVudC5jb3JlLndpbmRvd
+    type: aadPodIdentity
+    identityResourceID: 99ba577d-0ea9-48ef-8dbe-735aca5ac8f3
+    identityClientID:  8fa80ca5-32b6-47ac-a5ca-0b6aa4bbf99a
+
 ################################################################################
 # Specify if the cluster is RBAC enabled or not
 rbac:
