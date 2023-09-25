@@ -174,7 +174,8 @@ resource "helm_release" "ingress-azure" {
   }
   set {
     name  = "armAuth.secretJSON"
-    value = "$(az ad sp create-for-rbac --role Contributor --scope /subscriptions/${local.subscription_id} --sdk-auth | base64)"
+    value = "ewogICJjbGllbnRJZCI6ICI0YTMzYWIxYS02ODMwLTQ2MmQtOTFhMS0xYjkyYmNlMDIxNTYiLAogICJjbGllbnRTZWNyZXQiOiAiQV9iOFF+bWFxN05GLVlBQzJ3MV9KeTNnX0wuTnFtUGg5TUhObmNLMSIsCiAgInN1YnNjcmlwdGlvbklkIjogImM1NmFlYTJjLTUwZGUtNGFkYy05NjczLTZhODAwODg5MmMyMSIsCiAgInRlbmFudElkIjogIjE2NzYzMjY1LTE5OTgtNGM5Ni04MjZlLWMwNDE2MmIxZTA0MSIsCiAgImFjdGl2ZURpcmVjdG9yeUVuZHBvaW50VXJsIjogImh0dHBzOi8vbG9naW4ubWljcm9zb2Z0b25saW5lLmNvbSIsCiAgInJlc291cmNlTWFuYWdlckVuZHBvaW50VXJsIjogImh0dHBzOi8vbWFuYWdlbWVudC5henVyZS5jb20vIiwKICAiYWN0aXZlRGlyZWN0b3J5R3JhcGhSZXNvdXJjZUlkIjogImh0dHBzOi8vZ3JhcGgud2luZG93cy5uZXQvIiwKICAic3FsTWFuYWdlbWVudEVuZHBvaW50VXJsIjogImh0dHBzOi8vbWFuYWdlbWVudC5jb3JlLndpbmRvd3MubmV0Ojg0NDMvIiwKICAiZ2FsbGVyeUVuZHBvaW50VXJsIjogImh0dHBzOi8vZ2FsbGVyeS5henVyZS5jb20vIiwKICAibWFuYWdlbWVudEVuZHBvaW50VXJsIjogImh0dHBzOi8vbWFuYWdlbWVudC5jb3JlLndpbmRvd3MubmV0LyIKfQo="
+    # az ad sp create-for-rbac --role Contributor --scope /subscriptions/c56aea2c-50de-4adc-9673-6a8008892c21/resourceGroups/b2e1-gr2 --sdk-auth | base64
   }
   set {
     name  = "rbac.enabled"
