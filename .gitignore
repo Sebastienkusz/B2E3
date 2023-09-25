@@ -40,3 +40,5 @@ pyvenv.cfg
 
 # Local ssh key created
 **/ssh_keys/adminuser
+**/Ansible/roles/redis/commun
+.terraform.lock.hcl

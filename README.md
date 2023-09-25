@@ -170,3 +170,22 @@ et avec un navigateur internet, nous allons sur la page :
 ---------------------
 ## Topologie
 ![topologie](./topologie/b2e1-gr2.png)
+
+
+## AAD POD IDENTITY
+ helm install aad-pod-identity aad-pod-identity/aad-pod-identity
+NAME: aad-pod-identity
+LAST DEPLOYED: Wed Aug 30 10:20:25 2023
+NAMESPACE: default
+STATUS: deployed
+REVISION: 1
+TEST SUITE: None
+NOTES:
+You have successfully installed AAD Pod Identity in your Kubernetes cluster!
+
+To verify that AAD Pod Identity has started in standard mode, run:
+  kubectl --namespace=default get pods -l "app.kubernetes.io/component=mic"
+  kubectl --namespace=default get pods -l "app.kubernetes.io/component=nmi"
+
+
+Now you can follow the demos to get familiar with AAD Pod Identity: https://azure.github.io/aad-pod-identity/docs/demo/
