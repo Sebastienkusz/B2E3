@@ -138,3 +138,46 @@ resource "helm_release" "grafana" {
     value = random_password.grafana.result
   }
 }
+
+# Install nginx ingress controller form helm repo add application-gateway-kubernetes-ingress https://appgwingress.blob.core.windows.net/ingress-azure-helm-package/
+resource "helm_release" "ingress-azure" {
+  repository       = "https://appgwingress.blob.core.windows.net/ingress-azure-helm-package/"
+  chart            = "ingress-azure"
+  name             = "ingress-azure"
+  namespace        = "ingress-azure"
+  atomic           = true
+  cleanup_on_fail  = true
+  reuse_values     = true
+  skip_crds        = true
+  create_namespace = true
+  version          = "1.7.2"
+
+  set {
+    name  = "appgw.subscriptionId"
+    value = local.subscription_id
+  }
+  set {
+    name  = "appgw.resourceGroup"
+    value = local.resource_group_name
+  }
+  set {
+    name  = "appgw.name"
+    value = module.gateway.gateway_name
+  }
+  set {
+    name  = "appgw.usePrivateIP"
+    value = "false"
+  }
+  set {
+    name  = "armAuth.type"
+    value = "servicePrincipal"
+  }
+  set {
+    name  = "armAuth.secretJSON"
+    value = "$(az ad sp create-for-rbac --role Contributor --scope /subscriptions/${local.subscription_id} --sdk-auth | base64)"
+  }
+  set {
+    name  = "rbac.enabled"
+    value = "true"
+  }
+}
