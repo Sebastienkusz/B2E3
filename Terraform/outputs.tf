@@ -1,5 +1,5 @@
 output "pass" {
-  value     = random_password.grafana.result
+  value     = module.helm.random_password
   sensitive = true
 }
 
