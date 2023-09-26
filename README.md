@@ -83,7 +83,66 @@ On peut également récupérer l'URL du serveur Prometheus via les commandes:
 
 On peut ensuite se connecter via l'utilisateur **admin** et le mot de passe obtenu précedemment.
 
+### Cert-manager
+
+antoine@Antoine:~/b2e1-gr2$ helm install cert-manager jetstack/cert-manager --namespace cert-manager --version v1.7.1 --set installCRDs=true --create-namespace
+NAME: cert-manager
+LAST DEPLOYED: Mon Sep 25 12:05:28 2023
+NAMESPACE: cert-manager
+STATUS: deployed
+REVISION: 1
+TEST SUITE: None
+NOTES:
+cert-manager v1.7.1 has been deployed successfully!
+
+In order to begin issuing certificates, you will need to set up a ClusterIssuer
+or Issuer resource (for example, by creating a 'letsencrypt-staging' issuer).
+
+More information on the different types of issuers and how to configure them
+can be found in our documentation:
+
+https://cert-manager.io/docs/configuration/
+
+For information on how to configure cert-manager to automatically provision
+Certificates for Ingress resources, take a look at the `ingress-shim`
+documentation:
+
+https://cert-manager.io/docs/usage/ingress/
+
 ---------------------
+### Rancher
+
+ helm install rancher rancher-latest/rancher --namespace cattle-system --set hostname=rancher.10.1.1.25.sslip.io --set replicas=1  --creat
+e-namespace
+NAME: rancher
+LAST DEPLOYED: Mon Sep 25 12:14:49 2023
+NAMESPACE: cattle-system
+STATUS: deployed
+REVISION: 1
+TEST SUITE: None
+NOTES:
+Rancher Server has been installed.
+
+NOTE: Rancher may take several minutes to fully initialize. Please standby while Certificates are being issued, Containers are started and the Ingress rule comes up.
+
+Check out our docs at https://rancher.com/docs/
+
+If you provided your own bootstrap password during installation, browse to https://rancher.10.1.1.25.sslip.io to get started.
+
+If this is the first time you installed Rancher, get started by running this command and clicking the URL it generates:
+
+```
+echo https://rancher.10.1.1.25.sslip.io/dashboard/?setup=$(kubectl get secret --namespace cattle-system bootstrap-secret -o go-template='{{.data.bootstrapPassword|base64decode}}')
+```
+
+To get just the bootstrap password on its own, run:
+
+```
+kubectl get secret --namespace cattle-system bootstrap-secret -o go-template='{{.data.bootstrapPassword|base64decode}}{{ "\n" }}'
+```
+
+
+Happy Containering!
 ### 2 - Phase 2 - installation de Linteurs
 
 Nous allons utiliser tflint, ansible lint et pre-commit 

@@ -69,7 +69,9 @@ module "aks" {
 }
 
 module "helm" {
-  depends_on                    = [module.aks]
+  depends_on                    = [module.aks, module.gateway]
+  resource_group_name           = local.resource_group_name
+  subscription_id               = local.subscription_id
   source                        = "./modules/helm"
   prometheus_chart              = local.prometheus_chart
   prometheus_name               = local.prometheus_name
@@ -80,4 +82,10 @@ module "helm" {
   grafana_chart                 = local.grafana_chart
   grafana_namespace             = local.grafana_namespace
   grafana_repository            = local.grafana_repository
+  ingress_chart                 = local.ingress_chart
+  ingress_name                  = local.ingress_name
+  ingress_namespace_creation    = local.ingress_namespace_creation
+  ingress_namespace             = local.ingress_namespace
+  ingress_repository            = local.ingress_repository
+  gateway_name                  = module.gateway.gateway_name
 }

@@ -1,0 +1,13 @@
+apiVersion: networking.k8s.io/v1
+kind: IngressClass
+metadata:
+  labels:
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/instance: ingress-azure
+    app.kubernetes.io/version: "1.0"  # Set the appropriate version if available
+  annotations:
+    meta.helm.sh/release-name: ingress-azure
+    meta.helm.sh/release-namespace: ingress-azure  # Set the appropriate namespace
+  name: azure-application-gateway
+spec:
+  controller: azure/application-gateway

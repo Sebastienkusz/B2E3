@@ -90,4 +90,9 @@ locals {
   grafana_chart                 = "grafana"
   grafana_namespace             = local.prometheus_namespace
   grafana_repository            = "https://grafana.github.io/helm-charts"
+  ingress_chart                 = "ingress-azure"
+  ingress_name                  = "ingress-azure"
+  ingress_namespace_creation    = true
+  ingress_namespace             = "ingress-azure"
+  ingress_repository            = "https://appgwingress.blob.core.windows.net/ingress-azure-helm-package/"
 }
