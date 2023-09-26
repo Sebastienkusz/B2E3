@@ -173,7 +173,15 @@ installation d'Ansible Lint :
 
     pip3 install ansible-lint
 
+configurer le fichier .ansible-lint
 
+#### Pre-commit
+
+installation de pre-commit :
+
+    pip install pre-commit
+
+configurer le fichier .pre-commit-config.yaml
 
 ---------------------
 

@@ -4,7 +4,7 @@ locals {
   resource_group_name = "b2e1-gr2"
   location            = data.azurerm_resource_group.main.location
   location_wus        = "WestUS"
-  tenant_id           = "16763265-1998-4c96-826e-c04162b1e041"
+  #tenant_id           = "16763265-1998-4c96-826e-c04162b1e041"
 }
 
 # Network variables (only 2 networks)
@@ -77,4 +77,22 @@ locals {
   aks_domain_name_label = "${local.resource_group_name}-${local.aks_name}"
   pool_name             = "b2e1gr2pool"
   aks_vm_size           = "Standard_A2_v2"
+}
+
+# Variables pour le module helm - Prometheus et Grafana
+locals {
+  prometheus_chart              = "prometheus"
+  prometheus_name               = "prometheus"
+  prometheus_namespace_creation = true
+  prometheus_namespace          = "monitoring"
+  prometheus_repository         = "https://prometheus-community.github.io/helm-charts"
+  grafana_name                  = "grafana"
+  grafana_chart                 = "grafana"
+  grafana_namespace             = local.prometheus_namespace
+  grafana_repository            = "https://grafana.github.io/helm-charts"
+  ingress_chart                 = "ingress-azure"
+  ingress_name                  = "ingress-azure"
+  ingress_namespace_creation    = true
+  ingress_namespace             = "ingress-azure"
+  ingress_repository            = "https://appgwingress.blob.core.windows.net/ingress-azure-helm-package/"
 }

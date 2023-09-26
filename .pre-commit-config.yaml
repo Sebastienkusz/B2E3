@@ -3,27 +3,26 @@ repos:
     rev: v1.83.0 # Get the latest from: https://github.com/antonbabenko/pre-commit-terraform/releases
     hooks:
       - id: terraform_fmt
-      - id: terraform_docs
       - id: terraform_tflint
       - id: terraform_validate
 
-  - repo: https://github.com/ansible/ansible-lint/
-    rev: v6.18.0
-    hooks:
-      - id: ansible-lint
-        name: Ansible-lint
-        description: This hook runs ansible-lint.
-        entry: python3 -m ansiblelint -v --force-color
-        language: python
-        # do not pass files to ansible-lint, see:
-        # https://github.com/ansible/ansible-lint/issues/611
-        pass_filenames: false
-        files: ^.*\.(yaml|yml)$
-        always_run: true
-        additional_dependencies:
-          # https://github.com/pre-commit/pre-commit/issues/1526
-          # If you want to use specific version of ansible-core or ansible, feel
-          # free to override `additional_dependencies` in your own hook config
-          # file.
-          - ansible-core>=2.13.3
-        args: ["--exclude", "/terraform/", "/manifests/"]
+  # - repo: https://github.com/ansible/ansible-lint/
+  #   rev: v6.18.0
+  #   hooks:
+  #     - id: ansible-lint
+  #       name: Ansible-lint
+  #       description: This hook runs ansible-lint.
+  #       entry: python3 -m ansiblelint -v --force-color
+  #       language: python
+  #       # do not pass files to ansible-lint, see:
+  #       # https://github.com/ansible/ansible-lint/issues/611
+  #       pass_filenames: false
+  #       files: ^.*\.(yaml|yml)$
+  #       always_run: true
+  #       additional_dependencies:
+  #         # https://github.com/pre-commit/pre-commit/issues/1526
+  #         # If you want to use specific version of ansible-core or ansible, feel
+  #         # free to override `additional_dependencies` in your own hook config
+  #         # file.
+  #         - ansible-core>=2.13.3
+  #       args: ["--exclude", "/terraform/", "/manifests/"]
