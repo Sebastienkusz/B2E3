@@ -82,7 +82,6 @@ resource "azurerm_kubernetes_cluster" "main" {
   network_profile {
     network_plugin    = "kubenet"
     network_policy    = "calico"
-    load_balancer_sku = "standard"
   }
 
   identity {
