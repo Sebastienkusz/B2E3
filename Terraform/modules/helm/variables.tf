@@ -42,6 +42,7 @@ variable "prometheus_repository" {
   description = "(Required) The repository of prometheus in resource helm."
   nullable    = false
 }
+
 # ---------------------------------------------------------------------------------
 # Grafana
 variable "grafana_chart" {
@@ -67,6 +68,7 @@ variable "grafana_repository" {
   description = "(Required) The repository of grafana in resource helm."
   nullable    = false
 }
+
 # ---------------------------------------------------------------------------------
 # Ingress
 variable "ingress_chart" {
@@ -103,5 +105,38 @@ variable "ingress_repository" {
 variable "gateway_name" {
   type        = string
   description = "(Required) The name of the gateway."
+  nullable    = false
+}
+
+# ---------------------------------------------------------------------------------
+# Cert Manager
+variable "cert_manager_chart" {
+  type        = string
+  description = "(Required) The chart of ingress."
+  nullable    = false
+}
+
+variable "cert_manager_name" {
+  type        = string
+  description = "(Required) The name of ingress in resource helm."
+  nullable    = false
+}
+
+variable "cert_manager_namespace_creation" {
+  type        = bool
+  description = "(Required) Creation of the namaspace for ingress."
+  nullable    = false
+  default     = true
+}
+
+variable "cert_manager_namespace" {
+  type        = string
+  description = "(Required) The namespace of ingress in resource helm."
+  nullable    = false
+}
+
+variable "cert_manager_repository" {
+  type        = string
+  description = "(Required) The repository of ingress in resource helm."
   nullable    = false
 }

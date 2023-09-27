@@ -4,11 +4,11 @@ variable "resource_group" {
   nullable    = false
 }
 
-variable "resource_group_id" {
-  type        = string
-  description = "(Required) The ID of the resource group in which to create the cluster."
-  nullable    = false
-}
+# variable "resource_group_id" {
+#   type        = string
+#   description = "(Required) The ID of the resource group in which to create the cluster."
+#   nullable    = false
+# }
 
 variable "location" {
   type        = string
@@ -59,8 +59,8 @@ variable "cluster_name" {
   nullable    = false
 }
 
-variable "gateway_id" {
-  type        = string
-  description = "(Required) ID of the Application Gateway"
-  nullable    = false
-}
+# variable "gateway_id" {
+#   type        = string
+#   description = "(Required) ID of the Application Gateway"
+#   nullable    = false
+# }

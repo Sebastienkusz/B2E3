@@ -9,46 +9,46 @@ resource "azurerm_public_ip" "main" {
 }
 
 # Création du groupe de sécurité réseau pour la passerelle d'application
-resource "azurerm_network_security_group" "main" {
-  name                = "${var.resource_group}-gateway-nsg"
-  location            = var.location
-  resource_group_name = var.resource_group
-}
+# resource "azurerm_network_security_group" "main" {
+#   name                = "${var.resource_group}-gateway-nsg"
+#   location            = var.location
+#   resource_group_name = var.resource_group
+# }
 
-# Règle de sécurité pour la tranche de port 65200-65535 depuis n'importe quelle source sur la passerelle d'application ( Norme V2)
-resource "azurerm_network_security_rule" "main" {
-  name                        = "${var.resource_group}-gateway-nsg-rule"
-  priority                    = 100
-  direction                   = "Inbound"
-  access                      = "Allow"
-  protocol                    = "Tcp"
-  source_port_range           = "*"
-  destination_port_range      = "65200-65535"
-  source_address_prefix       = "GatewayManager"
-  destination_address_prefix  = "*"
-  resource_group_name         = var.resource_group
-  network_security_group_name = azurerm_network_security_group.main.name
-}
+# # Règle de sécurité pour la tranche de port 65200-65535 depuis n'importe quelle source sur la passerelle d'application ( Norme V2)
+# resource "azurerm_network_security_rule" "main" {
+#   name                        = "${var.resource_group}-gateway-nsg-rule"
+#   priority                    = 100
+#   direction                   = "Inbound"
+#   access                      = "Allow"
+#   protocol                    = "Tcp"
+#   source_port_range           = "*"
+#   destination_port_range      = "65200-65535"
+#   source_address_prefix       = "GatewayManager"
+#   destination_address_prefix  = "*"
+#   resource_group_name         = var.resource_group
+#   network_security_group_name = azurerm_network_security_group.main.name
+# }
 
-resource "azurerm_network_security_rule" "second" {
-  name                        = "Allow-HTTP-Inbound"
-  priority                    = 110
-  direction                   = "Inbound"
-  access                      = "Allow"
-  protocol                    = "Tcp"
-  source_port_range           = "*"
-  destination_port_range      = "80"
-  source_address_prefix       = "*"
-  destination_address_prefix  = "*"
-  resource_group_name         = var.resource_group
-  network_security_group_name = azurerm_network_security_group.main.name
-}
+# resource "azurerm_network_security_rule" "second" {
+#   name                        = "Allow-HTTP-Inbound"
+#   priority                    = 110
+#   direction                   = "Inbound"
+#   access                      = "Allow"
+#   protocol                    = "Tcp"
+#   source_port_range           = "*"
+#   destination_port_range      = "80"
+#   source_address_prefix       = "*"
+#   destination_address_prefix  = "*"
+#   resource_group_name         = var.resource_group
+#   network_security_group_name = azurerm_network_security_group.main.name
+# }
 
-# Association du NSG au sous-réseau de la passerelle
-resource "azurerm_subnet_network_security_group_association" "app-gateway-subnet-nsg" {
-  subnet_id                 = var.subnet_id
-  network_security_group_id = azurerm_network_security_group.main.id
-}
+# # Association du NSG au sous-réseau de la passerelle
+# resource "azurerm_subnet_network_security_group_association" "app-gateway-subnet-nsg" {
+#   subnet_id                 = var.subnet_id
+#   network_security_group_id = azurerm_network_security_group.main.id
+# }
 
 resource "azurerm_application_gateway" "main" {
   name                = "${var.resource_group}-gateway"

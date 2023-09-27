@@ -39,7 +39,6 @@ resource "helm_release" "grafana" {
   }
 }
 
-
 # Install nginx ingress controller form helm repo add application-gateway-kubernetes-ingress https://appgwingress.blob.core.windows.net/ingress-azure-helm-package/
 resource "helm_release" "ingress-azure" {
   repository       = var.ingress_repository
@@ -80,6 +79,19 @@ resource "helm_release" "ingress-azure" {
   }
   set {
     name  = "rbac.enabled"
+    value = "true"
+  }
+}
+
+resource "helm_release" "cert_manager" {
+  name             = var.cert_manager_name
+  namespace        = var.cert_manager_namespace
+  create_namespace = var.cert_manager_namespace_creation
+  chart            = var.cert_manager_chart
+  repository       = var.cert_manager_repository
+  version          = "v1.13.1"
+  set {
+    name  = "installCRDs"
     value = "true"
   }
 }
