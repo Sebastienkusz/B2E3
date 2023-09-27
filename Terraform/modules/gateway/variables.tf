@@ -87,4 +87,3 @@ variable "tier" {
   description = "(Required) The Tier of the SKU to use for this Application Gateway"
   nullable    = false
 }
-

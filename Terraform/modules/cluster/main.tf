@@ -78,3 +78,4 @@ resource "azurerm_kubernetes_cluster" "main" {
     type = "SystemAssigned"
   }
 }
+
