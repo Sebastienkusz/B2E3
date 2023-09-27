@@ -79,20 +79,25 @@ locals {
   aks_vm_size           = "Standard_A2_v2"
 }
 
-# Variables pour le module helm - Prometheus et Grafana
+# Variables pour le module helm - Prometheus, Grafana, Ingress, Cert-Manager
 locals {
-  prometheus_chart              = "prometheus"
-  prometheus_name               = "prometheus"
-  prometheus_namespace_creation = true
-  prometheus_namespace          = "monitoring"
-  prometheus_repository         = "https://prometheus-community.github.io/helm-charts"
-  grafana_name                  = "grafana"
-  grafana_chart                 = "grafana"
-  grafana_namespace             = local.prometheus_namespace
-  grafana_repository            = "https://grafana.github.io/helm-charts"
-  ingress_chart                 = "ingress-azure"
-  ingress_name                  = "ingress-azure"
-  ingress_namespace_creation    = true
-  ingress_namespace             = "ingress-azure"
-  ingress_repository            = "https://appgwingress.blob.core.windows.net/ingress-azure-helm-package/"
+  prometheus_chart                = "prometheus"
+  prometheus_name                 = "prometheus"
+  prometheus_namespace_creation   = true
+  prometheus_namespace            = "monitoring"
+  prometheus_repository           = "https://prometheus-community.github.io/helm-charts"
+  grafana_name                    = "grafana"
+  grafana_chart                   = "grafana"
+  grafana_namespace               = local.prometheus_namespace
+  grafana_repository              = "https://grafana.github.io/helm-charts"
+  ingress_chart                   = "ingress-azure"
+  ingress_name                    = "ingress-azure"
+  ingress_namespace_creation      = true
+  ingress_namespace               = "ingress-azure"
+  ingress_repository              = "https://appgwingress.blob.core.windows.net/ingress-azure-helm-package/"
+  cert_manager_chart              = "cert-manager"
+  cert_manager_name               = "cert-manager"
+  cert_manager_namespace_creation = true
+  cert_manager_namespace          = "cert-manager"
+  cert_manager_repository         = "https://charts.jetstack.io"
 }

@@ -4,7 +4,6 @@ provider "azurerm" {
   subscription_id = local.subscription_id
 }
 
-
 provider "helm" {
   kubernetes {
     host                   = module.aks.kube_config[0].host
@@ -15,4 +14,3 @@ provider "helm" {
     cluster_ca_certificate = base64decode(module.aks.kube_config[0].cluster_ca_certificate)
   }
 }
-
