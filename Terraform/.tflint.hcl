@@ -19,3 +19,9 @@ rule "terraform_deprecated_interpolation" {
 rule "terraform_deprecated_index" {
   enabled = true
 }
+
+rule "terraform_module_pinned_source" {
+  enabled = false
+  style = "flexible"
+  default_branches = ["main"]
+}

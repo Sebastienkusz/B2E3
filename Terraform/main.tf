@@ -1,6 +1,6 @@
 # Vnet, Subnets and Peering
 module "vnet" {
-  source         = "./modules/network"
+  source         = "git::ssh://git@ssh.dev.azure.com/v3/Simplon-AdminCloud-Bordeaux/b2e1-gr2/vnet?ref=main"
   resource_group = local.resource_group_name
   vnet_1         = local.network_europe
   vnet_2         = local.network_wus
@@ -9,7 +9,7 @@ module "vnet" {
 }
 
 module "vm" {
-  source         = "./modules/vm"
+  source         = "git::ssh://git@ssh.dev.azure.com/v3/Simplon-AdminCloud-Bordeaux/b2e1-gr2/vm?ref=main"
   resource_group = local.resource_group_name
   location       = local.location_wus
   vm_size        = local.vm_size
