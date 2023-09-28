@@ -78,6 +78,7 @@ module "helm" {
   prometheus_namespace_creation   = local.prometheus_namespace_creation
   prometheus_namespace            = local.prometheus_namespace
   prometheus_repository           = local.prometheus_repository
+  grafana_admin                   = local.grafana_admin
   grafana_name                    = local.grafana_name
   grafana_chart                   = local.grafana_chart
   grafana_namespace               = local.grafana_namespace
