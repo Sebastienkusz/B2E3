@@ -42,3 +42,6 @@ pyvenv.cfg
 **/ssh_keys/adminuser
 **/Ansible/roles/redis/commun
 .terraform.lock.hcl
+
+# Include tfstate for remote state storage
+!**/.terraform/terraform.tfstate
