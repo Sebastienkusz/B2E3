@@ -1,7 +1,0 @@
----
-
-# Users
-users:
-  - { name: "antoine", sshkey: "antoine" } 
-  - { name: "sebastien", sshkey: "sebastien" } 
-tmp_password: "MZFrhSWvlv73qfh7"
