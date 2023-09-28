@@ -45,6 +45,12 @@ variable "prometheus_repository" {
 
 # ---------------------------------------------------------------------------------
 # Grafana
+variable "grafana_admin" {
+  type        = string
+  description = "(Required) The admin username"
+  nullable    = false
+}
+
 variable "grafana_chart" {
   type        = string
   description = "(Required) The chart of grafana."

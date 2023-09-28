@@ -14,3 +14,8 @@ provider "helm" {
     cluster_ca_certificate = base64decode(module.aks.kube_config[0].cluster_ca_certificate)
   }
 }
+
+provider "grafana" {
+  url  = "https://b2e1-gr2-gateway.westeurope.cloudapp.azure.com" # module.gateway.gateway_fqdn
+  auth = "admin:KYNgl8m5UH6MIApscga00k2d"                         # "${local.grafana_admin}:${module.helm.random_password}"
+}

@@ -12,5 +12,9 @@ terraform {
       source  = "hashicorp/tls"
       version = ">= 4.0"
     }
+    grafana = {
+      source  = "grafana/grafana"
+      version = ">= 2.3.3"
+    }
   }
 }

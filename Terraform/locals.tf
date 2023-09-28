@@ -86,6 +86,7 @@ locals {
   prometheus_namespace_creation   = true
   prometheus_namespace            = "monitoring"
   prometheus_repository           = "https://prometheus-community.github.io/helm-charts"
+  grafana_admin                   = "admin"
   grafana_name                    = "grafana"
   grafana_chart                   = "grafana"
   grafana_namespace               = local.prometheus_namespace

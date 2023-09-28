@@ -30,7 +30,7 @@ resource "helm_release" "grafana" {
 
   set {
     name  = "adminUser"
-    value = "admin"
+    value = var.grafana_admin
   }
 
   set {
