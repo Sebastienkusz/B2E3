@@ -8,8 +8,6 @@ resource "azurerm_public_ip" "main" {
   sku                 = var.public_ip_sku
 }
 
-
-
 # Création du groupe de sécurité réseau pour la passerelle d'application
 # resource "azurerm_network_security_group" "main" {
 #   name                = "${var.resource_group}-gateway-nsg"
