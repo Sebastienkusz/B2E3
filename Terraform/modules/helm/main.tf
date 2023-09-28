@@ -95,15 +95,15 @@ resource "helm_release" "cert_manager" {
   }
 }
 
-resource "helm_release" "rancher" {
-  name             = var.rancher_name
-  namespace        = var.rancher_namespace
-  create_namespace = var.rancher_namespace_creation
-  chart            = var.rancher_chart
-  repository       = var.rancher_repository
-  version          = "v1.13.1"
-  set {
-    name  = "installCRDs"
-    value = "true"
-  }
-}
+# resource "helm_release" "rancher" {
+#   name             = var.rancher_name
+#   namespace        = var.rancher_namespace
+#   create_namespace = var.rancher_namespace_creation
+#   chart            = var.rancher_chart
+#   repository       = var.rancher_repository
+#   version          = "v1.13.1"
+#   set {
+#     name  = "installCRDs"
+#     value = "true"
+#   }
+# }
