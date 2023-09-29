@@ -12,5 +12,5 @@ output "users_ssh_redis" {
 }
 
 output "gateway_fqdn" {
-  value = module.gateway.gateway_fqdn
+  value = " https://${module.gateway.gateway_fqdn} "
 }
