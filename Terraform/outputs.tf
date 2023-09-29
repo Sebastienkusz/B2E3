@@ -10,3 +10,7 @@ output "admin_ssh_redis" {
 output "users_ssh_redis" {
   value = [for user_name, user_value in local.users : "${user_name} : ssh -i ~/.ssh/${user_value.private_key} ${user_name}@${module.vm.vm_fqdn} "]
 }
+
+output "gateway_fqdn" {
+  value = module.gateway.gateway_fqdn
+}

@@ -16,6 +16,6 @@ provider "helm" {
 }
 
 provider "grafana" {
-  url  = "https://b2e1-gr2-gateway.westeurope.cloudapp.azure.com" # module.gateway.gateway_fqdn
-  auth = "admin:KYNgl8m5UH6MIApscga00k2d"                         # "${local.grafana_admin}:${module.helm.random_password}"
+  url  = "https://${module.gateway.gateway_fqdn}"   #  # b2e1-gr2-gateway.westeurope.cloudapp.azure.com
+  auth = "${local.grafana_admin}:${module.helm.random_password}" #"admin:KYNgl8m5UH6MIApscga00k2d"                         
 }
