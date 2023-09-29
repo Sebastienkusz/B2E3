@@ -5,9 +5,9 @@ metadata:
   namespace: cert-manager
 spec:
   acme:
-    email: aazzcc@aazzee.com
-    server: https://acme-staging-v02.api.letsencrypt.org/directory # Used for staging only
-    # server: https://acme-v02.api.letsencrypt.org/directory # Used for prod environnement
+    email: aazzce@aazzee.com
+    # server: https://acme-staging-v02.api.letsencrypt.org/directory # Used for staging only
+    server: https://acme-v02.api.letsencrypt.org/directory # Used for prod environnement
     privateKeySecretRef:
       name: letsencrypt
     solvers:
