@@ -107,4 +107,17 @@ resource "azurerm_application_gateway" "main" {
     max_capacity = 3
   }
 
+  lifecycle {
+    ignore_changes = [
+      tags["managed-by-k8s-ingress"], 
+      backend_address_pool,
+      backend_http_settings,
+      frontend_port,
+      http_listener,
+      probe,
+      request_routing_rule,
+      ssl_certificate
+    ]
+  }
+
 }
