@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    kompose.cmd: kompose convert
+    kompose.version: 1.31.2 (a92241f79)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: cartservice
+  name: cartservice
+spec:
+  ports:
+    - name: "7070"
+      port: 7070
+      targetPort: 7070
+  selector:
+    io.kompose.service: cartservice
+status:
+  loadBalancer: {}

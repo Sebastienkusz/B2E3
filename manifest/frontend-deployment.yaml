@@ -1,0 +1,100 @@
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  name: letsencrypt-issuer
+  namespace: cert-manager
+spec:
+  acme:
+    email: aazzce@aazzee.com
+    # server: https://acme-staging-v02.api.letsencrypt.org/directory # Used for staging only
+    server: https://acme-v02.api.letsencrypt.org/directory # Used for prod environnement
+    privateKeySecretRef:
+      name: letsencrypt
+    solvers:
+      - http01:
+          ingress:
+            class: azure/application-gateway
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: frontend
+  namespace: default
+  annotations:
+    kubernetes.io/ingress.class: azure/application-gateway
+    appgw.ingress.kubernetes.io/request-timeout: "20"
+    appgw.ingress.kubernetes.io/health-probe-status-codes: "200-399, 401"
+    cert-manager.io/cluster-issuer: letsencrypt-issuer
+    cert-manager.io/acme-challenge-type: http01
+spec:
+  tls:
+    - hosts:
+        - b2e1-gr2-gateway.westeurope.cloudapp.azure.com
+      secretName: letsencrypt
+  rules:
+    - host: b2e1-gr2-gateway.westeurope.cloudapp.azure.com
+      http:
+        paths:
+          - pathType: Prefix
+            path: "/"
+            backend:
+              service:
+                name: frontend
+                port:
+                  number: 8082
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert
+    kompose.version: 1.31.2 (a92241f79)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: frontend
+  name: frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: frontend
+  strategy: {}
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert
+        kompose.version: 1.31.2 (a92241f79)
+      creationTimestamp: null
+      labels:
+        io.kompose.network/b2e1-gr2-ms-default: "true"
+        io.kompose.service: frontend
+    spec:
+      imagePullSecrets:
+      - name: toto
+      containers:
+        - env:
+            - name: AD_SERVICE_ADDR
+              value: adservice:9555
+            - name: CART_SERVICE_ADDR
+              value: cartservice:7070
+            - name: CHECKOUT_SERVICE_ADDR
+              value: checkoutservice:5050
+            - name: CURRENCY_SERVICE_ADDR
+              value: currencyservice:7000
+            - name: PORT
+              value: "8080"
+            - name: PRODUCT_CATALOG_SERVICE_ADDR
+              value: productcatalogservice:3550
+            - name: RECOMMENDATION_SERVICE_ADDR
+              value: recommendationservice:8080
+            - name: SHIPPING_SERVICE_ADDR
+              value: shippingservice:50051
+          image: b2e1gr2cr.azurecr.io/b2e1-gr2-ms_frontend
+          name: frontend
+          ports:
+            - containerPort: 8080
+              hostPort: 8082
+              protocol: TCP
+          resources: {}
+      restartPolicy: Always
+status: {}
