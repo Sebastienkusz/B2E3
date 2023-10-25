@@ -24,11 +24,13 @@ spec:
         io.kompose.network/b2e1-gr2-ms-default: "true"
         io.kompose.service: emailservice
     spec:
+      imagePullSecrets:
+      - name: toto
       containers:
         - env:
             - name: PORT
               value: "8080"
-          image: emailservice
+          image: b2e1gr2cr.azurecr.io/b2e1-gr2-ms_emailservice
           name: emailservice
           ports:
             - containerPort: 8080

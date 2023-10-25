@@ -24,11 +24,13 @@ spec:
         io.kompose.network/b2e1-gr2-ms-default: "true"
         io.kompose.service: shippingservice
     spec:
+      imagePullSecrets:
+      - name: toto
       containers:
         - env:
             - name: PORT
               value: "50051"
-          image: shippingservice
+          image: b2e1gr2cr.azurecr.io/b2e1-gr2-ms_shippingservice
           name: shippingservice
           ports:
             - containerPort: 50051

@@ -24,13 +24,15 @@ spec:
         io.kompose.network/b2e1-gr2-ms-default: "true"
         io.kompose.service: recommendationservice
     spec:
+      imagePullSecrets:
+      - name: toto
       containers:
         - env:
             - name: PORT
               value: "8080"
             - name: PRODUCT_CATALOG_SERVICE_ADDR
               value: productcatalogservice:3550
-          image: recommendationservice
+          image: b2e1gr2cr.azurecr.io/b2e1-gr2-ms_recommendationservice
           name: recommendationservice
           ports:
             - containerPort: 8080

@@ -24,11 +24,13 @@ spec:
         io.kompose.network/b2e1-gr2-ms-default: "true"
         io.kompose.service: productcatalogservice
     spec:
+      imagePullSecrets:
+      - name: toto
       containers:
         - env:
             - name: PORT
               value: "3550"
-          image: productcatalogservice
+          image: b2e1gr2cr.azurecr.io/b2e1-gr2-ms_productcatalogservice
           name: productcatalogservice
           ports:
             - containerPort: 3550

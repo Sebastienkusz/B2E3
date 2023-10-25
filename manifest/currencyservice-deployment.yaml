@@ -24,11 +24,13 @@ spec:
         io.kompose.network/b2e1-gr2-ms-default: "true"
         io.kompose.service: currencyservice
     spec:
+      imagePullSecrets:
+      - name: toto
       containers:
         - env:
             - name: PORT
               value: "7000"
-          image: currencyservice
+          image: b2e1gr2cr.azurecr.io/b2e1-gr2-ms_currencyservice
           name: currencyservice
           ports:
             - containerPort: 7000

@@ -24,6 +24,8 @@ spec:
         io.kompose.network/b2e1-gr2-ms-default: "true"
         io.kompose.service: checkoutservice
     spec:
+      imagePullSecrets:
+      - name: toto
       containers:
         - env:
             - name: CART_SERVICE_ADDR
@@ -38,7 +40,7 @@ spec:
               value: productcatalogservice:3550
             - name: SHIPPING_SERVICE_ADDR
               value: shippingservice:50051
-          image: checkoutservice
+          image: b2e1gr2cr.azurecr.io/b2e1-gr2-ms_checkoutservice
           name: checkoutservice
           ports:
             - containerPort: 5050

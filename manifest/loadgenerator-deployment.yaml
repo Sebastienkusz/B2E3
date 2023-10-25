@@ -24,11 +24,13 @@ spec:
         io.kompose.network/b2e1-gr2-ms-default: "true"
         io.kompose.service: loadgenerator
     spec:
+      imagePullSecrets:
+      - name: toto
       containers:
         - env:
             - name: FRONTEND_ADDR
               value: frontend:80
-          image: loadgenerator
+          image: b2e1gr2cr.azurecr.io/b2e1-gr2-ms_loadgenerator
           name: loadgenerator
           resources: {}
       restartPolicy: Always
