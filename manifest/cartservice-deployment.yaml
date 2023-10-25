@@ -24,11 +24,13 @@ spec:
         io.kompose.network/b2e1-gr2-ms-default: "true"
         io.kompose.service: cartservice
     spec:
+      imagePullSecrets:
+      - name: toto
       containers:
         - env:
             - name: REDIS_ADDR
               value: redis:6379
-          image: cartservice
+          image: b2e1gr2cr.azurecr.io/b2e1-gr2-ms_cartservice
           name: cartservice
           ports:
             - containerPort: 7070
