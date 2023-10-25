@@ -15,22 +15,24 @@ spec:
           ingress:
             class: azure/application-gateway
 ---
-apiVersion: networking.k8s.io/v1
-kind: Ingress
+
+apiVersion: v1
+kind: Service
 metadata:
-  name: grafana
-  namespace: monitoring
   annotations:
-    # kubernetes.io/ingress.class: azure/application-gateway
-    # appgw.ingress.kubernetes.io/request-timeout: "20"
-    appgw.ingress.kubernetes.io/health-probe-status-codes: "200-399, 401"
-    cert-manager.io/cluster-issuer: letsencrypt-issuer
-    cert-manager.io/acme-challenge-type: http01
+    kubernetes.io/ingress.class: azure/application-gateway
+    appgw.ingress.kubernetes.io/request-timeout: "20"
+    kompose.cmd: kompose convert
+    kompose.version: 1.31.2 (a92241f79)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: frontend
+  name: frontend
 spec:
   tls:
-    - hosts:
-        - b2e1-gr2-gateway.westeurope.cloudapp.azure.com
-      secretName: letsencrypt
+      - hosts:
+          - b2e1-gr2-gateway.westeurope.cloudapp.azure.com
+        secretName: letsencrypt
   rules:
     - host: b2e1-gr2-gateway.westeurope.cloudapp.azure.com
       http:
@@ -39,6 +41,12 @@ spec:
             path: "/"
             backend:
               service:
-                name: grafana
-                port:
-                  number: 80
+                name: frontend
+  ports:
+    - name: "80"
+      port: 80
+      targetPort: 8080
+  selector:
+    io.kompose.service: frontend
+status:
+  loadBalancer: {}

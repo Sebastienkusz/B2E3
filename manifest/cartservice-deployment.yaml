@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert
+    kompose.version: 1.31.2 (a92241f79)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: cartservice
+  name: cartservice
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: cartservice
+  strategy: {}
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert
+        kompose.version: 1.31.2 (a92241f79)
+      creationTimestamp: null
+      labels:
+        io.kompose.network/b2e1-gr2-ms-default: "true"
+        io.kompose.service: cartservice
+    spec:
+      containers:
+        - env:
+            - name: REDIS_ADDR
+              value: redis:6379
+          image: cartservice
+          name: cartservice
+          ports:
+            - containerPort: 7070
+              hostPort: 7070
+              protocol: TCP
+          resources: {}
+      restartPolicy: Always
+status: {}

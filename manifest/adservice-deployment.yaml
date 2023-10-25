@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert
+    kompose.version: 1.31.2 (a92241f79)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: adservice
+  name: adservice
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: adservice
+  strategy: {}
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert
+        kompose.version: 1.31.2 (a92241f79)
+      creationTimestamp: null
+      labels:
+        io.kompose.network/b2e1-gr2-ms-default: "true"
+        io.kompose.service: adservice
+    spec:
+      containers:
+        - env:
+            - name: PORT
+              value: "9555"
+          image: adservice
+          name: adservice
+          ports:
+            - containerPort: 9555
+              hostPort: 9555
+              protocol: TCP
+          resources: {}
+      restartPolicy: Always
+status: {}
