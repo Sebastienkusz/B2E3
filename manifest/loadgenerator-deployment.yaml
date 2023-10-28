@@ -24,8 +24,6 @@ spec:
         io.kompose.network/b2e1-gr2-ms-default: "true"
         io.kompose.service: loadgenerator
     spec:
-      imagePullSecrets:
-      - name: toto
       containers:
         - env:
             - name: FRONTEND_ADDR

@@ -1,20 +1,20 @@
-apiVersion: cert-manager.io/v1
-kind: ClusterIssuer
-metadata:
-  name: letsencrypt-issuer
-  namespace: cert-manager
-spec:
-  acme:
-    email: aazzce@aazzee.com
-    # server: https://acme-staging-v02.api.letsencrypt.org/directory # Used for staging only
-    server: https://acme-v02.api.letsencrypt.org/directory # Used for prod environnement
-    privateKeySecretRef:
-      name: letsencrypt
-    solvers:
-      - http01:
-          ingress:
-            class: azure/application-gateway
----
+# apiVersion: cert-manager.io/v1
+# kind: ClusterIssuer
+# metadata:
+#   name: letsencrypt-issuer
+#   namespace: cert-manager
+# spec:
+#   acme:
+#     email: aazzce@aazzee.com
+#     # server: https://acme-staging-v02.api.letsencrypt.org/directory # Used for staging only
+#     server: https://acme-v02.api.letsencrypt.org/directory # Used for prod environnement
+#     privateKeySecretRef:
+#       name: letsencrypt
+#     solvers:
+#       - http01:
+#           ingress:
+#             class: azure/application-gateway
+# ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
@@ -24,13 +24,13 @@ metadata:
     kubernetes.io/ingress.class: azure/application-gateway
     appgw.ingress.kubernetes.io/request-timeout: "20"
     appgw.ingress.kubernetes.io/health-probe-status-codes: "200-399, 401"
-    cert-manager.io/cluster-issuer: letsencrypt-issuer
-    cert-manager.io/acme-challenge-type: http01
+    # cert-manager.io/cluster-issuer: letsencrypt-issuer
+    # cert-manager.io/acme-challenge-type: http01
 spec:
-  tls:
-    - hosts:
-        - b2e1-gr2-gateway.westeurope.cloudapp.azure.com
-      secretName: letsencrypt
+  # tls:
+  #   - hosts:
+  #       - b2e1-gr2-gateway.westeurope.cloudapp.azure.com
+  #     secretName: letsencrypt
   rules:
     - host: b2e1-gr2-gateway.westeurope.cloudapp.azure.com
       http:
@@ -41,7 +41,7 @@ spec:
               service:
                 name: frontend
                 port:
-                  number: 8082
+                  number: 80
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -69,8 +69,6 @@ spec:
         io.kompose.network/b2e1-gr2-ms-default: "true"
         io.kompose.service: frontend
     spec:
-      imagePullSecrets:
-      - name: toto
       containers:
         - env:
             - name: AD_SERVICE_ADDR
@@ -93,7 +91,7 @@ spec:
           name: frontend
           ports:
             - containerPort: 8080
-              hostPort: 8082
+              hostPort: 80
               protocol: TCP
           resources: {}
       restartPolicy: Always

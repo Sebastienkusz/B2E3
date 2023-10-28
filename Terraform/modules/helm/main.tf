@@ -28,6 +28,7 @@ resource "helm_release" "grafana" {
   namespace  = var.grafana_namespace
   repository = var.grafana_repository
 
+  # Admin login
   set {
     name  = "adminUser"
     value = var.grafana_admin
@@ -37,6 +38,43 @@ resource "helm_release" "grafana" {
     name  = "adminPassword"
     value = random_password.grafana.result
   }
+
+  # Ingress Grafana
+  set {
+    name  = "grafana\\.ini.server.domain"
+    value = var.server_domain
+  }
+
+  set {
+    name  = "grafana\\.ini.server.root_url"
+    value = "%(protocol)s://%(domain)s/grafana"
+  }
+
+  set {
+    name  = "grafana\\.ini.server.serve_from_sub_path"
+    value = true
+  }
+
+  # Datasource Grafana
+  values = [
+    <<EOF
+datasources:
+  datasources.yaml:
+    apiVersion: 1
+    datasources:
+    - name: Prometheus
+      type: prometheus
+      url: http://prometheus-server.${var.grafana_namespace}.svc.cluster.local
+EOF
+  ]
+
+  # Dashboard Grafana
+  # values = [
+
+  # ]
+
+
+
 }
 
 # Install nginx ingress controller form helm repo add application-gateway-kubernetes-ingress https://appgwingress.blob.core.windows.net/ingress-azure-helm-package/

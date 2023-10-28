@@ -116,7 +116,8 @@ resource "azurerm_application_gateway" "main" {
       http_listener,
       probe,
       request_routing_rule,
-      ssl_certificate
+      ssl_certificate,
+      url_path_map
     ]
   }
 

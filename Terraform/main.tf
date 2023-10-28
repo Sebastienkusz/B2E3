@@ -72,6 +72,7 @@ module "helm" {
   depends_on                      = [module.aks, module.gateway]
   resource_group_name             = local.resource_group_name
   subscription_id                 = local.subscription_id
+  server_domain                   = module.gateway.gateway_fqdn
   source                          = "./modules/helm"
   prometheus_chart                = local.prometheus_chart
   prometheus_name                 = local.prometheus_name
