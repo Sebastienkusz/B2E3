@@ -24,8 +24,6 @@ spec:
         io.kompose.network/b2e1-gr2-ms-default: "true"
         io.kompose.service: paymentservice
     spec:
-      imagePullSecrets:
-      - name: toto
       containers:
         - env:
             - name: PORT

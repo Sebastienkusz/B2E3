@@ -10,6 +10,12 @@ variable "subscription_id" {
   nullable    = false
 }
 
+variable "server_domain" {
+  type        = string
+  description = "(Required) The fqdn of the server"
+  nullable    = false
+}
+
 # ---------------------------------------------------------------------------------
 # Prometheus
 variable "prometheus_chart" {
