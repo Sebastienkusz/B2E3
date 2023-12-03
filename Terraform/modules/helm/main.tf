@@ -39,7 +39,54 @@ resource "helm_release" "grafana" {
     value = random_password.grafana.result
   }
 
-  # Ingress Grafana
+  # Ingress
+  set {
+    name  = "ingress.enabled"
+    value = true
+  }
+
+  set {
+    name  = "ingress.annotations.kubernetes\\.io/ingress\\.class"
+    value = "azure/application-gateway"
+  }
+
+  set {
+    name  = "ingress.path"
+    value = "/grafana"
+  }
+
+  set {
+    name  = "ingress.pathType"
+    value = "Prefix"
+  }
+
+  set {
+    name  = "ingress.hosts"
+    value = var.server_domain
+  }
+
+  # Ingress cert manager
+  set {
+    name  = "ingress.annotations.cert-manager\\.io/cluster-issuer"
+    value = "letsencrypt-issuer"
+  }
+
+  set {
+    name  = "ingress.annotations.cert-manager\\.io/acme-challenge-type"
+    value = "http01"
+  }
+
+  set {
+    name  = "ingress.tls[0].hosts"
+    value = var.server_domain
+  }
+
+  set {
+    name  = "ingress.tls[0].secretName"
+    value = "letsencrypt"
+  }
+
+  # Ingress for Grafana path
   set {
     name  = "grafana\\.ini.server.domain"
     value = var.server_domain
@@ -56,24 +103,52 @@ resource "helm_release" "grafana" {
   }
 
   # Datasource Grafana
-  values = [
-    <<EOF
-datasources:
-  datasources.yaml:
-    apiVersion: 1
-    datasources:
-    - name: Prometheus
-      type: prometheus
-      url: http://prometheus-server.${var.grafana_namespace}.svc.cluster.local
-EOF
-  ]
+  set {
+    name  = "datasources.datasources\\.yaml.apiVersion"
+    value = "1"
+  }
+
+  set {
+    name  = "datasources.datasources\\.yaml.datasources[0].name"
+    value = "Prometheus"
+  }
+
+  set {
+    name  = "datasources.datasources\\.yaml.datasources[0].type"
+    value = "prometheus"
+  }
+
+  set {
+    name  = "datasources.datasources\\.yaml.datasources[0].url"
+    value = "http://prometheus-server.${var.grafana_namespace}.svc.cluster.local"
+  }
 
   # Dashboard Grafana
-  # values = [
+  values = [
+    <<EOF
+dashboardProviders:
+  dashboardproviders.yaml:
+    apiVersion: 1
+    providers:
+    - name: 'default'
+      orgId: 1
+      folder: ''
+      type: file
+      disableDeletion: false
+      editable: true
+      options:
+        path: /var/lib/grafana/dashboards/default
 
-  # ]
-
-
+dashboards:
+  default:
+    kubernetes:
+      json: |
+        ${indent(8, file("${path.root}/dashboards/Node_Exporter.json"))}
+    azure:
+      gntId: 14986
+      version: 1
+EOF
+  ]
 
 }
 
@@ -130,8 +205,29 @@ resource "helm_release" "cert_manager" {
   set {
     name  = "installCRDs"
     value = "true"
-  }
+  }  
 }
+
+# resource "kubectl_manifest" "clusterissuer_letsencrypt_prod" {
+#   depends_on = [helm_release.cert_manager]
+#   yaml_body = <<YAML
+# apiVersion: cert-manager.io/v1
+# kind: ClusterIssuer
+# metadata:
+#   name: letsencrypt-issuer
+#   namespace: cert-manager
+# spec:
+#   acme:
+#     email: aazzce@aazzee.com
+#     server: https://acme-v02.api.letsencrypt.org/directory # Used for prod environnement
+#     privateKeySecretRef:
+#       name: letsencrypt
+#     solvers:
+#       - http01:
+#           ingress:
+#             class: azure/application-gateway
+# YAML
+# }
 
 # resource "helm_release" "rancher" {
 #   name             = var.rancher_name
