@@ -1,11 +1,11 @@
-# resource "null_resource" "get_credentials" {
-#   depends_on = [module.aks]
-#   provisioner "local-exec" {
-#     working_dir = path.root
-#     interpreter = ["bash", "-c"]
-#     command     = "az aks get-credentials --resource-group b2e1-gr2 --name b2e1-gr2-aks -f ~/.kube/config --overwrite-existing"
-#   }
-# }
+resource "null_resource" "get_credentials" {
+  depends_on = [module.aks]
+  provisioner "local-exec" {
+    working_dir = path.root
+    interpreter = ["bash", "-c"]
+    command     = "az aks get-credentials --resource-group b2e1-gr2 --name b2e1-gr2-aks -f ~/.kube/config --overwrite-existing"
+  }
+}
 
 # resource "null_resource" "acr" {
 #   provisioner "local-exec" {

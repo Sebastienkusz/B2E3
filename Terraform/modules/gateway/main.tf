@@ -109,7 +109,7 @@ resource "azurerm_application_gateway" "main" {
 
   lifecycle {
     ignore_changes = [
-      tags["managed-by-k8s-ingress"], 
+      tags["managed-by-k8s-ingress"],
       backend_address_pool,
       backend_http_settings,
       frontend_port,

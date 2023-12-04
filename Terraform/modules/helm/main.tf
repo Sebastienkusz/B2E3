@@ -61,7 +61,7 @@ resource "helm_release" "grafana" {
   }
 
   set {
-    name  = "ingress.hosts"
+    name  = "ingress.hosts[0]"
     value = var.server_domain
   }
 
@@ -77,7 +77,7 @@ resource "helm_release" "grafana" {
   }
 
   set {
-    name  = "ingress.tls[0].hosts"
+    name  = "ingress.tls[0].hosts[0]"
     value = var.server_domain
   }
 
@@ -124,6 +124,7 @@ resource "helm_release" "grafana" {
   }
 
   # Dashboard Grafana
+  # tflint-ignore: Invalid_function_argument
   values = [
     <<EOF
 dashboardProviders:
@@ -205,7 +206,7 @@ resource "helm_release" "cert_manager" {
   set {
     name  = "installCRDs"
     value = "true"
-  }  
+  }
 }
 
 # resource "kubectl_manifest" "clusterissuer_letsencrypt_prod" {
