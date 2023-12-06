@@ -212,6 +212,21 @@ Puis, connexion au serveur distant avec :
 et avec un navigateur internet, nous allons sur la page :
   localhost:3000
 
+---------------------
+### 3 - Phase 3 - Microservices
+
+Une fois l'infrastructure déployée avec Terraform, il faut lancer les commandes suivantes
+
+    az aks get-credentials --resource-group b2e1-gr2 --name b2e1-gr2-aks -f ~/.kube/config --overwrite-existing
+
+    az acr login --name b2e1gr2cr
+
+    az aks update -n b2e1-gr2-aks -g b2e1-gr2 --attach-acr b2e1gr2cr
+
+Puis appliquer les microservices à l'aks
+  dans le dossier /manifest
+
+    ./apply.sh
 
 ---------------------
 

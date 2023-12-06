@@ -11,7 +11,7 @@ kubectl apply -f shippingservice-deployment.yaml
 kubectl apply -f currencyservice-deployment.yaml  
 kubectl apply -f productcatalogservice-deployment.yaml
 kubectl apply -f loadgenerator-deployment.yaml
-kubectl apply -f redis-deployment.yaml
+# kubectl apply -f redis-deployment.yaml
 
 kubectl apply -f adservice-service.yaml        
 kubectl apply -f emailservice-service.yaml           
@@ -23,6 +23,6 @@ kubectl apply -f paymentservice-service.yaml
 kubectl apply -f shippingservice-service.yaml
 kubectl apply -f currencyservice-service.yaml  
 kubectl apply -f productcatalogservice-service.yaml
-kubectl apply -f redis-service.yaml
+# kubectl apply -f redis-service.yaml
 
 # kubectl apply -f grafana.yml

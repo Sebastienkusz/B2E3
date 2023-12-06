@@ -83,7 +83,7 @@ resource "helm_release" "grafana" {
 
   set {
     name  = "ingress.tls[0].secretName"
-    value = "letsencrypt"
+    value = "grafana-tls-04-12-2023"
   }
 
   # Ingress for Grafana path

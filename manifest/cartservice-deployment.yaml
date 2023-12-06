@@ -27,7 +27,7 @@ spec:
       containers:
         - env:
             - name: REDIS_ADDR
-              value: redis:6379
+              value: b2e1-gr2-vm.westus.cloudapp.azure.com:6379
           image: b2e1gr2cr.azurecr.io/b2e1-gr2-ms_cartservice
           name: cartservice
           ports:
