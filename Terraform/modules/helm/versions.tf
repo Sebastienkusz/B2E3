@@ -10,5 +10,9 @@ terraform {
       source  = "hashicorp/random"
       version = ">= 3.5"
     }
+    kubectl = {
+      source  = "gavinbunney/kubectl"
+      version = "1.14.0"
+    }
   }
 }
